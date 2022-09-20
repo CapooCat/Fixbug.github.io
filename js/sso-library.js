@@ -99,11 +99,16 @@ $("body").on("focus", ".des-input", function () {
     PrevFocus = $(this);
 });
 
+var origin_val = null;
 $("body").on("input", ".des-input", function (e) {
     $('#test').html($(this).val() + ", " + e.originalEvent.data);
 
     var start = $(this)[0].selectionStart
     var end = $(this)[0].selectionEnd
+    // $(this).val(e.originalEvent.data.slice(-1));
+    if(origin_val !== null && e.originalEvent.data !== null) {
+        $(this).val(origin_val + e.originalEvent.data.slice(-1));
+    }
 
     if($(this).val().match(/\s/)) {
         //trừ đi số whitespace sau đó lấy giá trị con trỏ
@@ -112,7 +117,10 @@ $("body").on("input", ".des-input", function (e) {
         end -= space_num;
     }
 
+    origin_val = null;
     var value = $(this).val().toString().replaceAll(" ", "");
+    if(e.originalEvent.data === " ")
+        origin_val = $(this).val();
 
     $(this).val(value);
     $(this)[0].selectionStart = start;
