@@ -112,11 +112,10 @@ $("body").on("input", ".des-input", function (e) {
         var space_num = ($(this).val().match(/\s/g) || []).length
         start -= space_num;
         end -= space_num;
-        console.log("ok");
     }
 
     if(origin_val !== null && e.originalEvent.data !== null && e.originalEvent.data !== " ") {
-        $(this).val(origin_val.splice(start, 0, e.originalEvent.data.slice(-1)));
+        $(this).val(insert(origin_val, start, e.originalEvent.data.slice(-1)));
     }
 
     origin_val = null;
@@ -130,9 +129,9 @@ $("body").on("input", ".des-input", function (e) {
     
 });
 
-String.prototype.splice = function(idx, rem, str) {
-    return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
-};
+function insert(str, index, value) {
+    return str.substr(0, index) + value + str.substr(index);
+}
 
 $(document).on('click', function (e) {
     if (PrevFocus) {
