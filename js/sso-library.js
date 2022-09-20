@@ -106,7 +106,7 @@ $("body").on("input", ".des-input", function (e) {
     var start = $(this)[0].selectionStart
     var end = $(this)[0].selectionEnd
     // $(this).val(e.originalEvent.data.slice(-1));
-    if(origin_val !== null && e.originalEvent.data !== null) {
+    if(origin_val !== null && e.originalEvent.data !== null && e.originalEvent.data !== " ") {
         $(this).val(origin_val + e.originalEvent.data.slice(-1));
     }
 
