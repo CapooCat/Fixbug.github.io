@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Đăng nhập</title>
+</head>
+<link href="css/font.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/all.min.css" rel="stylesheet">
+
+<script src="js/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<body>
+    <section class="container fade-in">
+            <div class="top-title">
+                <h3>FPT Single ID</h3>
+                <span>Đăng nhập 1 lần duy nhất để truy cập tất cả các ứng dụng dịch vụ của FPT TELECOM</span>
+            </div>
+
+            <div class="main-image" style="margin: 20px">
+                <img src="images\Login.svg">
+            </div>
+
+            <span class="des-input-title">USERNAME</span>
+            <div class="input-container">
+                <input type="text" id="username" class="des-input username" placeholder="Nhập số điện thoại/email">
+                <div class="input-action">
+                    <span class="input-error">!</span>
+                    <span class="clear-input" onclick="clear('username')"><i class="fa-solid fa-xmark"></i></span>
+                </div>
+            </div>
+            <span class="des-error">Đã có lỗi xảy ra</span>
+
+            <div class="des-forget">
+                <a href="javascript:void(0);" id="respwd" class="des-link">Quên mật khẩu?</a>
+            </div>
+
+            <a href="javascript:Continue();" id="next" class="des-btn">Tiếp tục</a>
+
+            <div class="des-login-title"><a href="javascript:void(0)" class="des-link">Đăng ký
+                ngay</a><span>hoặc</span></div>
+            <div class="des-login-select">
+                <a href="javascript:void(0);" class="des-icon"><img src="images\google.svg"></a>
+                <a href="javascript:void(0);" class="des-icon"><img src="images\facebook.svg"></a>
+            </div>
+
+            <a href="javascript:void(0);"
+                style="font-size: 13px;display: block; color: #282828; text-decoration: underline; margin-top: 20px; margin-bottom: 20px;"
+                class="des-link">Màn hình đăng nhập cũ</a>
+    </section>
+</body>
+<script src="js/sso-library.js"></script>
+</html>
