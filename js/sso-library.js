@@ -99,7 +99,8 @@ $("body").on("focus", ".des-input", function () {
     PrevFocus = $(this);
 });
 
-$("body").on("input", ".des-input", function () {
+$("body").on("input", ".des-input", function (e) {
+    $('#test').html($(this).val() + ", " + e.originalEvent.data);
 
     var start = $(this)[0].selectionStart
     var end = $(this)[0].selectionEnd
