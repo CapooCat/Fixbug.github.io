@@ -115,13 +115,14 @@ $("body").on("input", ".des-input", function (e) {
     }
 
     if(origin_val !== null && e.originalEvent.data !== null && e.originalEvent.data !== " ") {
-        $(this).val(insert(origin_val, start, e.originalEvent.data.slice(-1)));
+        $(this).val(insert(origin_val, start - 1, e.originalEvent.data.slice(-1)));
     }
 
     origin_val = null;
     var value = $(this).val().toString().replaceAll(" ", "");
-    if(e.originalEvent.data === " ")
-        origin_val = $(this).val();
+    if(e.originalEvent.data === " ") {
+        origin_val = value;
+    }
 
     $(this).val(value);
     $(this)[0].selectionStart = start;
