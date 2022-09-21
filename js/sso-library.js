@@ -139,9 +139,9 @@ $("body").on("input", ".des-input", function (e) {
         }
     }
 
-    if(e.originalEvent.data === " ") {
-        origin_val = value;
-    }
+    // if(e.originalEvent.data === " ") {
+    //     origin_val = value;
+    // }
     
     $(this).val(value);
     $(this)[0].selectionStart = start;
