@@ -108,7 +108,6 @@ $("body").on("keydown", ".des-input", function (e) {
         e.preventDefault();
 
         origin_val = $(this).val();
-        origin_index = $(this)[0].selectionStart + 1;
         if($(this)[0].selectionStart === 0) {
             origin_val = null;
         }
@@ -129,7 +128,7 @@ $("body").on("input", ".des-input", function (e) {
     //xoá bỏ hết whitespace
     var value = $(this).val().toString().replaceAll(" ", "");
     if(origin_val !== null && origin_index !== null) {
-        if(e.originalEvent.data !== null && e.originalEvent.data !== " " && e.originalEvent.data !== $(this).val().substr(0 , start)) {
+        if(e.originalEvent.data !== null && e.originalEvent.data !== " " || e.originalEvent.data !== $(this).val().substr(0 , start)) {
             value = insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1));
             start = origin_index;
             end = origin_index;
@@ -138,9 +137,9 @@ $("body").on("input", ".des-input", function (e) {
         }
     }
 
-    // if(e.originalEvent.data === " ") {
-    //     origin_val = value;
-    // }
+    if(e.originalEvent.data === " ") {
+        origin_val = value;
+    }
     
     $(this).val(value);
     $(this)[0].selectionStart = start;
