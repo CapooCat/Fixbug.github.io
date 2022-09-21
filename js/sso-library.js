@@ -109,20 +109,22 @@ $("body").on("keydown", ".des-input", function (e) {
 
 $("body").on("input", ".des-input", function (e) {
     PrevFocus = $(this);
-
-    var start = $(this)[0].selectionStart
-    var end = $(this)[0].selectionEnd
+    var start = $(this)[0].selectionStart;
+    var end = $(this)[0].selectionEnd;
+    origin_val = start > 0 && start <= 2 ? null : origin_val;
 
     $('#test').html(e.originalEvent.data + ", " + $(this).val());
 
+    //lọc whitespace và lấy giá trị con trỏ
     if($(this).val().match(/\s/)) {
-        //trừ đi số whitespace sau đó lấy giá trị con trỏ
         var space_num = ($(this).val().match(/\s/g) || []).length
         start -= space_num;
         end -= space_num;
     }
-    
+
+    //xoá bỏ hết whitespace
     var value = $(this).val().toString().replaceAll(" ", "");
+    console.log(start);
     if(origin_val !== null && origin_index !== null) {
         if(e.originalEvent.data !== null && e.originalEvent.data !== " " && e.originalEvent.data !== $(this).val().substr(0 , start)) {
             value = insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1));
