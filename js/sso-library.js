@@ -124,7 +124,7 @@ $("body").on("input", ".des-input", function (e) {
     
     var value = $(this).val().toString().replaceAll(" ", "");
     if(origin_val !== null && origin_index !== null) {
-        if(e.originalEvent.data !== null && e.originalEvent.data !== " " && e.originalEvent.data !== $(this).val().slice(-origin_index)) {
+        if(e.originalEvent.data !== null && e.originalEvent.data !== " " && e.originalEvent.data !== $(this).val().substr(0 , start)) {
             value = insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1));
             start = origin_index;
             end = origin_index;
