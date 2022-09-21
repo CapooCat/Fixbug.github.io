@@ -105,7 +105,6 @@ var origin_val = null;
 var origin_index = null;
 $("body").on("keydown", ".des-input", function (e) {
     origin_index = $(this)[0].selectionStart + 1;
-    origin_val = $(this).val();
 });
 
 $("body").on("input", ".des-input", function (e) {
@@ -130,9 +129,14 @@ $("body").on("input", ".des-input", function (e) {
         origin_index = null;
         origin_val = null;
     }
+
+    var value = $(this).val().toString().replaceAll(" ", "");
+    if(e.originalEvent.data === " ") {
+        origin_val = value;
+    }
     
     if((origin_val !== null && origin_index !== null) || e.originalEvent.inputType === "insertFromPaste") {
-        var value = $(this).val().toString().replaceAll(" ", "");
+        
         $(this).val(value);
     }
 
