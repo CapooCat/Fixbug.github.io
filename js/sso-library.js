@@ -111,9 +111,14 @@ $("body").on("input", ".des-input", function (e) {
     if($(this).val().match(/\s/)) {
         //trừ đi số whitespace sau đó lấy giá trị con trỏ
         var space_num = ($(this).val().match(/\s/g) || []).length
-        space_num += e.originalEvent.data.length - 1
         start -= space_num;
         end -= space_num;
+    }
+
+    if(e.originalEvent.data.length > 1)
+    {
+        start -= e.originalEvent.data - 1;
+        end -= e.originalEvent.data - 1;
     }
 
     $('#test').html(start + ", " + end);
