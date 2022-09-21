@@ -104,8 +104,10 @@ $("body").on("focus", ".des-input", function () {
 var origin_val = null;
 var origin_index = null;
 $("body").on("keydown", ".des-input", function (e) {
+    if(e.keyCode === 32)
+        e.preventDefault();
+        
     origin_index = $(this)[0].selectionStart + 1;
-    origin_val = $(this).val();
     if($(this)[0].selectionStart === 0) {
         origin_val = null;
     }
@@ -115,8 +117,6 @@ $("body").on("input", ".des-input", function (e) {
     PrevFocus = $(this);
     var start = $(this)[0].selectionStart;
     var end = $(this)[0].selectionEnd;
-
-    //$('#test').html(e.originalEvent.data + ", " + $(this).val());
 
     //lọc whitespace và lấy giá trị con trỏ
     if($(this).val().match(/\s/)) {
@@ -135,6 +135,10 @@ $("body").on("input", ".des-input", function (e) {
             origin_index = null;
             origin_val = null;
         }
+    }
+
+    if(e.originalEvent.data === " ") {
+        origin_val = value;
     }
     
     $(this).val(value);
