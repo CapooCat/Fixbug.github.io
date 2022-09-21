@@ -121,25 +121,22 @@ $("body").on("input", ".des-input", function (e) {
         start -= space_num;
         end -= space_num;
     }
-
+    
+    var value = $(this).val().toString().replaceAll(" ", "");
     if(origin_val !== null && origin_index !== null && e.originalEvent.data !== null && e.originalEvent.data !== " ") {
-        $(this).val(insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1)))
+        value = insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1));
         start = origin_index;
         end = origin_index;
         origin_index = null;
         origin_val = null;
     }
 
-    var value = $(this).val().toString().replaceAll(" ", "");
+    
     if(e.originalEvent.data === " ") {
         origin_val = value;
     }
     
-    if((origin_val !== null && origin_index !== null) || e.originalEvent.inputType === "insertFromPaste") {
-        
-        $(this).val(value);
-    }
-
+    $(this).val(value);
     $(this)[0].selectionStart = start;
     $(this)[0].selectionEnd = end;
     
