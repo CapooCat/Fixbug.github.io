@@ -49,6 +49,7 @@ $("body").on("keyup", ".username", function (event) {
 });
 
 $("body").on("click", ".clear-input", function (event) {
+    origin_val = null;
     $(this).parent().parent().find("input").val("");
     $(this).css('display', 'none');
     if (PrevFocus) {
@@ -101,6 +102,7 @@ $("body").on("focus", ".des-input", function () {
 
 var origin_val = null;
 $("body").on("input", ".des-input", function (e) {
+    PrevFocus = $(this);
     $('#test').html($(this).val() + ", " + e.originalEvent.data);
 
     var start = $(this)[0].selectionStart
@@ -115,6 +117,7 @@ $("body").on("input", ".des-input", function (e) {
     }
 
     if(origin_val !== null && e.originalEvent.data !== null && e.originalEvent.data !== " ") {
+        $(this).val("");
         $(this).val(insert(origin_val, start - 1, e.originalEvent.data.slice(-1)));
     }
 
@@ -146,7 +149,7 @@ $(document).on('click', function (e) {
 });
 
 function ToggleHide(obj_input, type) {
-    if (PrevFocus) {
+    if (PrevFocus !== null) {
         PrevFocus.focus();
     }
 
