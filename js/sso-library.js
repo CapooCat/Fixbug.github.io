@@ -105,13 +105,15 @@ var origin_val = null;
 var origin_index = null;
 $("body").on("keydown", ".des-input", function (e) {
     origin_index = $(this)[0].selectionStart + 1;
+    if($(this)[0].selectionStart === 0) {
+        origin_val = null;
+    }
 });
 
 $("body").on("input", ".des-input", function (e) {
     PrevFocus = $(this);
     var start = $(this)[0].selectionStart;
     var end = $(this)[0].selectionEnd;
-    origin_val = start > 0 && start <= 1 ? null : origin_val;
 
     $('#test').html(e.originalEvent.data + ", " + $(this).val());
 
