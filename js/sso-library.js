@@ -104,9 +104,6 @@ $("body").on("focus", ".des-input", function () {
 var origin_val = null;
 var origin_index = null;
 $("body").on("keydown", ".des-input", function (e) {
-    if(e.keyCode === 32)
-        e.preventDefault();
-        
     origin_index = $(this)[0].selectionStart + 1;
     if($(this)[0].selectionStart === 0) {
         origin_val = null;
