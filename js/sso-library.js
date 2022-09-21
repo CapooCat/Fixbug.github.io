@@ -111,6 +111,7 @@ $("body").on("input", ".des-input", function (e) {
     PrevFocus = $(this);
     var start = $(this)[0].selectionStart;
     var end = $(this)[0].selectionEnd;
+    origin_val = start > 0 && start <= 1 ? null : origin_val;
 
     $('#test').html(e.originalEvent.data + ", " + $(this).val());
 
@@ -129,6 +130,8 @@ $("body").on("input", ".des-input", function (e) {
             value = insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1));
             start = origin_index;
             end = origin_index;
+            origin_index = null;
+            origin_val = null;
         }
     }
 
@@ -139,8 +142,6 @@ $("body").on("input", ".des-input", function (e) {
     $(this).val(value);
     $(this)[0].selectionStart = start;
     $(this)[0].selectionEnd = end;
-    origin_index = null;
-    origin_val = null;
 });
 
 function insert(str, index, value) {
