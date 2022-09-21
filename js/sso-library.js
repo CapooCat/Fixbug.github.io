@@ -104,17 +104,24 @@ var origin_val = null;
 var origin_index = null;
 $("body").on("input", ".des-input", function (e) {
     PrevFocus = $(this);
-    $('#test').html($(this).val() + ", " + e.originalEvent.data);
-    
+
     var start = $(this)[0].selectionStart
     var end = $(this)[0].selectionEnd
     // $(this).val(e.originalEvent.data.slice(-1));
+
+    $('#test').html(origin_index + ", " + start);
 
     if($(this).val().match(/\s/)) {
         //trừ đi số whitespace sau đó lấy giá trị con trỏ
         var space_num = ($(this).val().match(/\s/g) || []).length
         start -= space_num;
         end -= space_num;
+    }
+
+    var value = $(this).val().toString().replaceAll(" ", "");
+    if(e.originalEvent.data === " ") {
+        origin_val = value;
+        origin_index = start + 1;
     }
 
     if(origin_val !== null && e.originalEvent.data !== null && e.originalEvent.data !== " ") {
@@ -128,12 +135,6 @@ $("body").on("input", ".des-input", function (e) {
 
         origin_index = null;
         origin_val = null;
-    }
-    
-    var value = $(this).val().toString().replaceAll(" ", "");
-    if(e.originalEvent.data === " ") {
-        origin_val = value;
-        origin_index = start + 1;
     }
 
     $(this).val(value);
