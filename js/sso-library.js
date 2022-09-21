@@ -117,8 +117,8 @@ $("body").on("input", ".des-input", function (e) {
 
     if(e.originalEvent.data.length > 1)
     {
-        start -= e.originalEvent.data - 1;
-        end -= e.originalEvent.data - 1;
+        start -= e.originalEvent.data.length - 1;
+        end -= e.originalEvent.data.length - 1;
     }
 
     $('#test').html(start + ", " + end);
