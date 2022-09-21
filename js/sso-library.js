@@ -105,6 +105,7 @@ var origin_val = null;
 var origin_index = null;
 $("body").on("keydown", ".des-input", function (e) {
     origin_index = $(this)[0].selectionStart + 1;
+    origin_val = $(this).val();
     if($(this)[0].selectionStart === 0) {
         origin_val = null;
     }
@@ -115,7 +116,7 @@ $("body").on("input", ".des-input", function (e) {
     var start = $(this)[0].selectionStart;
     var end = $(this)[0].selectionEnd;
 
-    $('#test').html(e.originalEvent.data + ", " + $(this).val());
+    //$('#test').html(e.originalEvent.data + ", " + $(this).val());
 
     //lọc whitespace và lấy giá trị con trỏ
     if($(this).val().match(/\s/)) {
@@ -126,7 +127,6 @@ $("body").on("input", ".des-input", function (e) {
 
     //xoá bỏ hết whitespace
     var value = $(this).val().toString().replaceAll(" ", "");
-    console.log(start);
     if(origin_val !== null && origin_index !== null) {
         if(e.originalEvent.data !== null && e.originalEvent.data !== " " && e.originalEvent.data !== $(this).val().substr(0 , start)) {
             value = insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1));
@@ -135,10 +135,6 @@ $("body").on("input", ".des-input", function (e) {
             origin_index = null;
             origin_val = null;
         }
-    }
-
-    if(e.originalEvent.data === " ") {
-        origin_val = value;
     }
     
     $(this).val(value);
