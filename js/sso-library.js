@@ -131,12 +131,13 @@ $("body").on("input", ".des-input", function (e) {
         origin_val = null;
     }
 
-    
     if(e.originalEvent.data === " ") {
         origin_val = value;
     }
     
-    $(this).val(value);
+    if(e.originalEvent.data !== null || e.originalEvent.inputType === "insertFromPaste")
+        $(this).val(value);
+
     $(this)[0].selectionStart = start;
     $(this)[0].selectionEnd = end;
     
