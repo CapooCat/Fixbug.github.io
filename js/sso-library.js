@@ -101,6 +101,7 @@ $("body").on("focus", ".des-input", function () {
 });
 
 var origin_val = null;
+var num = 0;
 $("body").on("input", ".des-input", function (e) {
     PrevFocus = $(this);
     
@@ -113,12 +114,11 @@ $("body").on("input", ".des-input", function (e) {
         var space_num = ($(this).val().match(/\s/g) || []).length
         start -= space_num;
         end -= space_num;
-    }
 
-    if(e.originalEvent.data.length > 1)
-    {
-        start -= e.originalEvent.data.length - 1;
-        end -= e.originalEvent.data.length - 1;
+        if(e.originalEvent.data.length > 1) {
+            start -= num;
+            end -= num;
+        }
     }
 
     $('#test').html(start + ", " + end);
@@ -131,6 +131,7 @@ $("body").on("input", ".des-input", function (e) {
     var value = $(this).val().toString().replaceAll(" ", "");
     if(e.originalEvent.data === " ") {
         origin_val = value;
+        ++num;
     }
 
     $(this).val(value);
