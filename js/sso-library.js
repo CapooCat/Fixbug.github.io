@@ -107,7 +107,7 @@ $("body").on("keydown", ".des-input", function (e) {
     if(e.keyCode === 32)
         e.preventDefault();
 
-        origin_val = $(this).val().toString().replaceAll(" ", "");
+        origin_val = $(this).val();
         origin_index = $(this)[0].selectionStart + 1;
         if($(this)[0].selectionStart === 0) {
             origin_val = null;
