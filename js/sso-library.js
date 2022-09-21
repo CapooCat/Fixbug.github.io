@@ -122,17 +122,18 @@ $("body").on("input", ".des-input", function (e) {
             $(this).val(insert(origin_val, origin_index, e.originalEvent.data.slice(-1)))
             start = origin_index;
             end = origin_index;
-            origin_index = null;
         } else {
             $(this).val(insert(origin_val, start - 1, e.originalEvent.data.slice(-1)));
         }
+
+        origin_index = null;
         origin_val = null;
     }
     
     var value = $(this).val().toString().replaceAll(" ", "");
     if(e.originalEvent.data === " ") {
         origin_val = value;
-        origin_index = start - 1;
+        origin_index = start;
     }
 
     $(this).val(value);
