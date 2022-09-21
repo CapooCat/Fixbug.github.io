@@ -133,7 +133,7 @@ $("body").on("input", ".des-input", function (e) {
     var value = $(this).val().toString().replaceAll(" ", "");
     if(e.originalEvent.data === " ") {
         origin_val = value;
-        origin_index = start;
+        origin_index = start + 1;
     }
 
     $(this).val(value);
