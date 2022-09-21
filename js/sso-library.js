@@ -118,7 +118,7 @@ $("body").on("input", ".des-input", function (e) {
     }
 
     if(origin_val !== null && e.originalEvent.data !== null && e.originalEvent.data !== " ") {
-        if(e.originalEvent.data > 1) {
+        if(e.originalEvent.data.length > 1) {
             $(this).val(insert(origin_val, origin_index, e.originalEvent.data.slice(-1)))
             start = origin_index;
             end = origin_index;
