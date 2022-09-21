@@ -118,26 +118,24 @@ $("body").on("input", ".des-input", function (e) {
         end -= space_num;
     }
 
+    if(origin_val !== null && origin_index !== null && e.originalEvent.data !== null && e.originalEvent.data !== " ") {
+        $(this).val(insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1)))
+        start = origin_index;
+        end = origin_index;
+        origin_index = null;
+        origin_val = null;
+    }
+
     var value = $(this).val().toString().replaceAll(" ", "");
     if(e.originalEvent.data === " ") {
         origin_val = value;
         origin_index = start + 1;
     }
 
-    if(origin_val !== null && e.originalEvent.data !== null && e.originalEvent.data !== " ") {
-        if(e.originalEvent.data.length > 1) {
-            $(this).val(insert(origin_val, origin_index, e.originalEvent.data.slice(-1)))
-            start = origin_index;
-            end = origin_index;
-        } else {
-            $(this).val(insert(origin_val, start - 1, e.originalEvent.data.slice(-1)));
-        }
-
-        origin_index = null;
-        origin_val = null;
+    if(origin_val !== null && origin_index !== null) {
+        $(this).val(value);
     }
 
-    $(this).val(value);
     $(this)[0].selectionStart = start;
     $(this)[0].selectionEnd = end;
     
