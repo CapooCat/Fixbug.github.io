@@ -106,13 +106,12 @@ var origin_index = null;
 $("body").on("keydown", ".des-input", function (e) {
     if(e.keyCode === 32)
         e.preventDefault();
-    else {
-        origin_val = $(this).val();
+
+        origin_val = $(this).val().toString().replaceAll(" ", "");
         origin_index = $(this)[0].selectionStart + 1;
         if($(this)[0].selectionStart === 0) {
             origin_val = null;
         }
-    }
 });
 
 $("body").on("input", ".des-input", function (e) {
