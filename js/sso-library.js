@@ -113,7 +113,7 @@ $("body").on("input", ".des-input", function (e) {
     var start = $(this)[0].selectionStart
     var end = $(this)[0].selectionEnd
 
-    $('#test').html(origin_index + ", " + start);
+    $('#test').html(e.originalEvent.data + ", " + $(this).val());
 
     if($(this).val().match(/\s/)) {
         //trừ đi số whitespace sau đó lấy giá trị con trỏ
@@ -123,10 +123,12 @@ $("body").on("input", ".des-input", function (e) {
     }
     
     var value = $(this).val().toString().replaceAll(" ", "");
-    if(origin_val !== null && origin_index !== null && e.originalEvent.data !== " ") {
+    if(origin_val !== null && origin_index !== null && e.originalEvent.data !== null && e.originalEvent.data !== " ") {
         value = insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1));
         start = origin_index;
         end = origin_index;
+        origin_index = null;
+        origin_val = null;
     }
 
     if(e.originalEvent.data === " ") {
@@ -136,8 +138,6 @@ $("body").on("input", ".des-input", function (e) {
     $(this).val(value);
     $(this)[0].selectionStart = start;
     $(this)[0].selectionEnd = end;
-    origin_index = null;
-    origin_val = null;
 });
 
 function insert(str, index, value) {
