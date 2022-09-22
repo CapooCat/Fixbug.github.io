@@ -114,12 +114,6 @@ $("body").on("input", ".des-input", function (e) {
 
     $("#test").html(origin_val + ", " + e.originalEvent.data);
 
-    if(e.originalEvent.data !== null) {
-        if(origin_val.substr(e.originalEvent.data.length) === e.originalEvent.data && e.originalEvent.length > 1) {
-            e.originalEvent.data = null;
-        }
-    }
-
     //xoá bỏ hết whitespace
     if(origin_val !== null && e.originalEvent.data !== null && e.originalEvent.data !== " ") {
         value = insert(origin_val, origin_index - 1, e.originalEvent.data.substr(e.originalEvent.data.length - 1));
@@ -129,7 +123,7 @@ $("body").on("input", ".des-input", function (e) {
         origin_index -= 2;
 
     } else if (e.originalEvent.data === " ") {
-        value = origin_val; 
+        value = value.replaceAll(" ", ""); 
         origin_index -= 1;
     }
     
