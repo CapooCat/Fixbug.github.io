@@ -130,7 +130,7 @@ $("body").on("input", ".des-input", function (e) {
     var value = $(this).val().toString().replaceAll(" ", "");
     if (origin_val !== null && origin_index !== null) {
         if (e.originalEvent.data !== null && e.originalEvent.data !== " " && e.originalEvent.data !== $(this).val().substr(0, start)) {
-            value = $(this).val(insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1)));
+            value = $(this).val(insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1))).val();
             start = origin_index;
             end = origin_index;
             origin_index = null;
