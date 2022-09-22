@@ -118,23 +118,19 @@ $("body").on("input", ".des-input", function (e) {
     PrevFocus = $(this);
     var start = $(this)[0].selectionStart;
     var end = $(this)[0].selectionEnd;
-    var value = $(this).val();
-    var input_val = e.originalEvent.data;
 
     //lọc whitespace và lấy giá trị con trỏ
-    if (value.match(/\s/)) {
-        var space_num = (value.match(/\s/g) || []).length
+    if ($(this).val().match(/\s/)) {
+        var space_num = ($(this).val().match(/\s/g) || []).length
         start -= space_num;
         end -= space_num;
     }
 
-    $("#test").html(value + ", " + input_val + ", " + origin_val);
-
     //xoá bỏ hết whitespace
-    value = value.replaceAll(" ", "");
+    var value = $(this).val().toString().replaceAll(" ", "");
     if (origin_val !== null && origin_index !== null) {
-        if (e.originalEvent.data !== null && input_val !== " " && input_val !== $(this).val().substr(0, start)) {
-            value = insert(origin_val, origin_index - 1, input_val.slice(-1));
+        if (e.originalEvent.data !== null && e.originalEvent.data !== " " && e.originalEvent.data !== $(this).val().substr(0, start)) {
+            value = $(this).val(insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1)));
             start = origin_index;
             end = origin_index;
             origin_index = null;
@@ -142,7 +138,7 @@ $("body").on("input", ".des-input", function (e) {
         }
     }
 
-    else if (input_val === " ") {
+    else if (e.originalEvent.data === " ") {
         origin_val = value;
     }
 
