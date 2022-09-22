@@ -131,11 +131,11 @@ $("body").on("input", ".des-input", function (e) {
     if (origin_val !== null && origin_index !== null) {
         if (e.originalEvent.data !== null && e.originalEvent.data !== " " && e.originalEvent.data !== $(this).val().substr(0, start)) {
             value = insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1));
-            start = origin_index;
-            end = origin_index;
-            origin_index = null;
-            origin_val = null;
         }
+
+        start = origin_index;
+        end = origin_index; 
+        origin_val = null;
     }
 
     else if (e.originalEvent.data === " ") {
