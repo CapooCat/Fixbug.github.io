@@ -115,7 +115,7 @@ $("body").on("input", ".des-input", function (e) {
     $("#test").html(origin_val + ", " + e.originalEvent.data);
 
     if(e.originalEvent.data !== null) {
-        if(origin_val.toString().substr(e.originalEvent.data.length) === e.originalEvent.data && e.originalEvent.length > 1) {
+        if(origin_val.substr(e.originalEvent.data.length) === e.originalEvent.data && e.originalEvent.length > 1) {
             e.originalEvent.data = null;
         }
     }
