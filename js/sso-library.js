@@ -119,7 +119,8 @@ $("body").on("input", ".des-input", function (e) {
     var start = $(this)[0].selectionStart;
     var end = $(this)[0].selectionEnd;
     var value = $(this).val();
-    $(this).val("");
+
+    $("#test").html(value + ", " + e.originalEvent.data); 
 
     //lọc whitespace và lấy giá trị con trỏ
     if(value.match(/\s/)) {
