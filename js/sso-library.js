@@ -118,24 +118,27 @@ $("body").on("input", ".des-input", function (e) {
     PrevFocus = $(this);
     var start = $(this)[0].selectionStart;
     var end = $(this)[0].selectionEnd;
+    var value = $(this).val();
 
     //lọc whitespace và lấy giá trị con trỏ
-    if ($(this).val().match(/\s/)) {
-        var space_num = ($(this).val().match(/\s/g) || []).length
+    if (value.match(/\s/)) {
+        var space_num = (value.match(/\s/g) || []).length
         start -= space_num;
         end -= space_num;
     }
 
+    $("#test").html(value + ", " + e.originalEvent.data + ", " + origin_val);
+
     //xoá bỏ hết whitespace
-    var value = $(this).val().toString().replaceAll(" ", "");
+    value = value.replaceAll(" ", "");
     if (origin_val !== null && origin_index !== null) {
         if (e.originalEvent.data !== null && e.originalEvent.data !== " " && e.originalEvent.data !== $(this).val().substr(0, start)) {
             value = insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1));
+            start = origin_index;
+            end = origin_index;
+            origin_index = null;
+            origin_val = null;
         }
-
-        start = origin_index;
-        end = origin_index; 
-        origin_val = null;
     }
 
     else if (e.originalEvent.data === " ") {
