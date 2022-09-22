@@ -119,6 +119,7 @@ $("body").on("input", ".des-input", function (e) {
     var start = $(this)[0].selectionStart;
     var end = $(this)[0].selectionEnd;
     var value = $(this).val();
+    $(this).val("");
 
     //lọc whitespace và lấy giá trị con trỏ
     if(value.match(/\s/)) {
@@ -131,7 +132,7 @@ $("body").on("input", ".des-input", function (e) {
     //xoá bỏ hết whitespace
     
     if(origin_val !== null && origin_index !== null) {
-        if(e.originalEvent.data !== null && e.originalEvent.data !== " ") {
+        if(e.originalEvent.data !== null && e.originalEvent.data !== " " && e.originalEvent.data !== value.substr(0 , start)) {
             value = insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1));
             start = origin_index;
             end = origin_index;
