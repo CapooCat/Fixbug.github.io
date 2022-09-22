@@ -113,13 +113,14 @@ $("body").on("input", ".des-input", function (e) {
     var value = $(this).val();
 
     $("#test").html(origin_val + ", " + e.originalEvent.data);
+    console.log(e.originalEvent.data);
 
     //xoá bỏ hết whitespace
-    if(origin_val !== null && e.originalEvent.data !== null && e.originalEvent.data !== " ") {
+    if(origin_val !== null && e.originalEvent.data !== null && e.originalEvent.data !== " " && origin_val.substr(0, e.originalEvent.data.length) !== e.originalEvent.data) {
         value = insert(origin_val, origin_index - 1, e.originalEvent.data.substr(e.originalEvent.data.length - 1));
 
-    } else if (origin_val !== null && e.originalEvent.data === null && e.originalEvent.data !== " ") {
-        value = remove(origin_val, origin_index - 2);
+    } else if (origin_val !== null && ( e.originalEvent.data === null || origin_val.substr(0, e.originalEvent.data.length) === e.originalEvent.data )  && e.originalEvent.data !== " ") {
+        value = remove(origin_val, origin_index - 1);
         origin_index -= 2;
 
     } else if (e.originalEvent.data === " ") {
