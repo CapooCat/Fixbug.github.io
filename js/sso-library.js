@@ -106,30 +106,25 @@ var origin_index = null;
 $("body").on("keydown", ".des-input", function (e) {
     origin_index = $(this)[0].selectionStart + 1;
     origin_val = $(this).val();
-    if($(this)[0].selectionStart === 0) {
-        origin_val = null;
-    }
-
 });
 
 $("body").on("input", ".des-input", function (e) {
     PrevFocus = $(this);
     var value = $(this).val();
 
-    $("#test").html(origin_val); 
+    $("#test").html(origin_val + ", " + e.originalEvent.data);
 
     //xoá bỏ hết whitespace
     if(origin_val !== null && e.originalEvent.data !== null && e.originalEvent.data !== " ") {
         value = insert(origin_val, origin_index - 1, e.originalEvent.data.substr(e.originalEvent.data.length - 1));
 
     } else if (origin_val !== null && e.originalEvent.data === null && e.originalEvent.data !== " ") {
-        value = remove(origin_val, origin_index - 1);
+        value = remove(origin_val, origin_index - 2);
         origin_index -= 2;
 
     } else if (e.originalEvent.data === " ") {
-        value = value.toString().replaceAll(" ", "");
+        value = origin_val; 
         origin_index -= 1;
-        
     }
     
     $(this).val(value);
