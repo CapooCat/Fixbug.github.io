@@ -104,40 +104,51 @@ $("body").on("focus", ".des-input", function () {
 var origin_val = null;
 var origin_index = null;
 $("body").on("keydown", ".des-input", function (e) {
-    origin_index = $(this)[0].selectionStart + 1;
-    origin_val = $(this).val();
+    if (e.keyCode === 32)
+        e.preventDefault();
+    else {
+        origin_index = $(this)[0].selectionStart + 1;
+        if ($(this)[0].selectionStart === 0) {
+            origin_val = null;
+        }
+    }
 });
 
 $("body").on("input", ".des-input", function (e) {
     PrevFocus = $(this);
-    var value = $(this).val();
+    var start = $(this)[0].selectionStart;
+    var end = $(this)[0].selectionEnd;
 
-    $("#test").html(origin_val + ", " + e.originalEvent.data);
+    //lọc whitespace và lấy giá trị con trỏ
+    if ($(this).val().match(/\s/)) {
+        var space_num = ($(this).val().match(/\s/g) || []).length
+        start -= space_num;
+        end -= space_num;
+    }
 
     //xoá bỏ hết whitespace
-    if(origin_val !== null && e.originalEvent.data !== null && e.originalEvent.data !== " ") {
-        value = insert(origin_val, origin_index - 1, e.originalEvent.data.substr(e.originalEvent.data.length - 1));
-
-    } else if (origin_val !== null && e.originalEvent.data === null && e.originalEvent.data !== " ") {
-        value = remove(origin_val, origin_index - 1);
-        origin_index -= 2;
-
-    } else if (e.originalEvent.data === " ") {
-        value = value.replaceAll(" ", ""); 
-        origin_index -= 1;
+    var value = $(this).val().toString().replaceAll(" ", "");
+    if (origin_val !== null && origin_index !== null) {
+        if (e.originalEvent.data !== null && e.originalEvent.data !== " " && e.originalEvent.data !== $(this).val().substr(0, start)) {
+            value = insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1));
+            start = origin_index;
+            end = origin_index;
+            origin_index = null;
+            origin_val = null;
+        }
     }
-    
+
+    if (e.originalEvent.data === " ") {
+        origin_val = value;
+    }
+
     $(this).val(value);
-    $(this)[0].selectionStart = origin_index;
-    $(this)[0].selectionEnd = origin_index;
+    $(this)[0].selectionStart = start;
+    $(this)[0].selectionEnd = end;
 });
 
 function insert(str, index, value) {
     return str.substr(0, index) + value + str.substr(index);
-}
-
-function remove(str, index) {
-    return str.substr(0, index - 1) + str.substr(index);
 }
 
 $(document).on('click', function (e) {
