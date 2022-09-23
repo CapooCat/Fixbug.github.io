@@ -174,17 +174,15 @@ $(document).on('click', function (e) {
 });
 
 function ToggleHide(obj_input, type) {
-    if (PrevFocus) {
-        PrevFocus.focus();
-    }
-
     if (type == "password") {
         $(obj_input).addClass("password");
-        $(obj_input).prop("type", "password");
     }
     else {
         $(obj_input).removeClass("password");
-        $(obj_input).prop("type", "text");
+    }
+
+    if (PrevFocus) {
+        PrevFocus.focus();
     }
 
     if ($(obj_input + " + .input-action > .unhide").css("display") == 'flex') {
