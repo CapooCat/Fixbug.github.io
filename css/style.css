@@ -11,6 +11,8 @@
         position: absolute;
         color: black;
         transition: .3s;
+        -webkit-transition: .3s;
+        -moz-transition: .3s;
         z-index: 9999;
         width: 24px;
         height: 24px;
@@ -77,6 +79,8 @@
         background-color: var(--main_color);
         border: 1px solid var(--main_color);
         transition: .3s;
+        -webkit-transition: .3s;
+        -moz-transition: .3s;
     }
 
     .next-btn:hover {
@@ -435,6 +439,8 @@
         border-bottom: 1px solid var(--grey);
         font-weight: 700;
         transition: 0.3s !important;
+        -webkit-transition: .3s !important;
+        -moz-transition: .3s !important;
         transition-delay: 0.15s !important;
         -webkit-transition-delay: 0.15s !important;
         -moz-transition-delay: 0.15s !important;
@@ -494,6 +500,8 @@
         border-bottom: 1px solid #CCCFD7;
         text-align: center;
         transition: .2s;
+        -webkit-transition: .2s;
+        -moz-transition: .2s;
         caret-color: transparent;
         -webkit-border-radius: 0;
         -moz-border-radius: 0;
@@ -534,6 +542,8 @@
         font-weight: 700;
         margin-top: 30px;
         transition: margin 0s, background-color .2s, color .2s;
+        -webkit-transition: margin 0s, background-color .2s, color .2s;
+        -moz-transition: margin 0s, background-color .2s, color .2s;
     }
 
     .des-btn-block {
@@ -547,6 +557,8 @@
         font-weight: 700;
         margin-top: 30px;
         transition: margin 0s, background-color .2s, color .2s;
+        -webkit-transition: margin 0s, background-color .2s, color .2s;
+        -moz-transition: margin 0s, background-color .2s, color .2s;
         pointer-events: none;
         background-color: #A7A7A7;
         user-select: none;
@@ -650,6 +662,8 @@
         align-items: center;
         justify-content: center;
         transition: 0.3s;
+        -webkit-transition: .3s;
+        -moz-transition: .3s;
         transition-delay: 0.15s;
         -webkit-transition-delay: 0.15s;
         -moz-transition-delay: 0.15s;
@@ -1010,6 +1024,8 @@
 
     .tab-container a {
         transition: .3s;
+        -webkit-transition: .3s;
+        -moz-transition: .3s;
         width: 100%;
         height: 100%;
         display: flex;
@@ -1024,6 +1040,8 @@
 
     .tab-container .active {
         transition: .3s;
+        -webkit-transition: .3s;
+        -moz-transition: .3s;
         border-radius: 8px;
         background-color: var(--main_color);
         position: absolute;
@@ -1070,7 +1088,6 @@
   
   /* Create a custom checkbox */
   .checkmark {
-    transition: .2s;
     cursor: pointer;
     border-radius: 50%;
     position: absolute;
@@ -1080,6 +1097,8 @@
     width: 20px;
     background-color: #eee;
     transition: .2s;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
   }
   
   /* On mouse-over, add a grey background color */
@@ -1119,6 +1138,8 @@
 
   .select-box {
     transition: .3s;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
     border: 1px solid #F4F4F4;
     height: 80px;
     background-color: #F4F4F4;
@@ -1179,6 +1200,8 @@
     background-color: white;
     border-radius: 50%;
     transition: .3s;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
     box-sizing: border-box;
   }
   
