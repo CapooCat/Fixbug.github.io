@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Đăng nhập</title>
+    <title>Mật khẩu</title>
 </head>
 <link href="css/font.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
@@ -12,30 +12,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <body>
     <section class="container fade-in">
-            <div class="top-title">
-                <h3>FPT Single ID</h3>
-                <span>Đăng nhập 1 lần duy nhất để truy cập tất cả các ứng dụng dịch vụ của FPT TELECOM</span>
+            <a href="javascript:GoBack()" class="des-back"><i class="fa-solid fa-arrow-left"></i></a>
+
+            <div class="main-image">
+                <img src="images\Password.svg">
             </div>
 
-            <div class="main-image" style="margin: 20px">
-                <img src="images\Login.svg">
+            <h1>Mật khẩu</h1>
+
+            <div class="tab-container">
+                <input type="radio" name="tab" id="pass" checked>
+                <label for="pass" class="des-tab-title"><a href="javascript:ChangeTab('pass')">Password</a></label>
+                <input type="radio" name="tab" id="code">
+                <label for="code" class="des-tab-title"><a href="javascript:ChangeTab('code')">Pin Code</a></label>
+                <div class="active"></div>
             </div>
 
-            <span class="des-input-title">USERNAME</span>
-            <div class="input-container">
-                <input type="text" id="username" class="des-input username" placeholder="Nhập số điện thoại/email">
+            <div class="input-container" id="tab-password">
+                <input type="text" id="password" class="des-input password" placeholder="Nhập mật khẩu tiêu chuẩn">
                 <div class="input-action">
                     <span class="input-error">!</span>
-                    <span class="clear-input" onclick="clear('username')"><i class="fa-solid fa-xmark"></i></span>
+                    <span class="eye-input unhide" style="display: flex;"
+                        onclick="ToggleHide('#password', 'text')"><i class="fa-solid fa-eye"></i></span>
+                    <span class="eye-input hide" onclick="ToggleHide('#password', 'password')"><i
+                            class="fa-solid fa-eye-slash"></i></span>
                 </div>
             </div>
+
+            <div class="input-container" id="tab-code" style="display: none;">
+                <input type="text" class="des-input-code code password" pattern="[0-9]*" inputmode="numeric">
+                <input type="text" class="des-input-code code password" pattern="[0-9]*" inputmode="numeric">
+                <input type="text" class="des-input-code code password" pattern="[0-9]*" inputmode="numeric">
+                <input type="text" class="des-input-code code password" pattern="[0-9]*" inputmode="numeric">
+                <input type="text" class="des-input-code code password" pattern="[0-9]*" inputmode="numeric">
+                <input type="text" class="des-input-code code password" pattern="[0-9]*" inputmode="numeric">
+
+                <div class="input-action" style="border: none;">
+                    <span class="eye-input unhide" style="display: flex;"
+                        onclick="ToggleHide('.code', 'text')"><i class="fa-solid fa-eye"></i></span>
+                    <span class="eye-input hide" onclick="ToggleHide('.code', 'password')"><i
+                            class="fa-solid fa-eye-slash"></i></span>
+                </div>
+            </div>
+
             <span class="des-error">Đã có lỗi xảy ra</span>
 
             <div class="des-forget">
                 <a href="javascript:void(0);" id="respwd" class="des-link">Quên mật khẩu?</a>
             </div>
 
-            <a href="javascript:Continue();" id="next" class="des-btn">Tiếp tục</a>
+            <a href="javascript:Redirect('Result.html')" class="des-btn">Tiếp tục</a>
 
             <div class="des-login-title"><a href="javascript:void(0)" class="des-link">Đăng ký
                 ngay</a><span>hoặc</span></div>
@@ -44,12 +70,20 @@
                 <a href="javascript:void(0);" class="des-icon"><img src="images\facebook.svg"></a>
             </div>
 
-            <div id="test"></div>
-
             <a href="javascript:void(0);"
                 style="font-size: 13px;display: block; color: #282828; text-decoration: underline; margin-top: 20px; margin-bottom: 20px;"
                 class="des-link">Màn hình đăng nhập cũ</a>
     </section>
 </body>
 <script src="js/sso-library.js"></script>
+<script>
+
+window.onbeforeunload = function () {
+    $('#pass').prop('checked', true);
+    $('#password').focus();
+}
+
+$('#password').focus();
+
+</script>
 </html>

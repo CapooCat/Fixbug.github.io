@@ -99,6 +99,7 @@ $("body").on("focus", ".des-input-code", function () {
 
 $("body").on("focus", ".des-input", function () {
     PrevFocus = $(this);
+    origin_index = $(this)[0].selectionStart;
 });
 
 var origin_val = null;
@@ -163,14 +164,17 @@ $(document).on('click', function (e) {
 });
 
 function ToggleHide(obj_input, type) {
-    if (PrevFocus !== null) {
-        PrevFocus.focus();
-    }
-
-    if (type == "password")
+    if (type == "password") {
         $(obj_input).addClass("password");
+        $(obj_input).prop('type','password');
+    }
     else {
         $(obj_input).removeClass("password");
+        $(obj_input).prop('type','text');
+    }
+
+    if (PrevFocus !== null) {
+        PrevFocus.focus();
     }
 
     if ($(obj_input + " + .input-action > .unhide").css("display") == 'flex') {
