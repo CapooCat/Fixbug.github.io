@@ -2,6 +2,18 @@
     //$("#LoginForm").submit(function () { console.log("submit") });
     $('#LoginForm').trigger('submit');
 };
+
+$(document).ready(function() {
+    var animate = sessionStorage.getItem("animation");
+    if(animate !== null && animate !== "") {
+        $(".container").removeClass("fade-in");
+        $(".container").addClass(animate);
+        $(".intro-container").removeClass("fade-in");
+        $(".intro-container").addClass(animate);
+        sessionStorage.removeItem("animation");
+    }
+});
+
 function ContinueUsername() {
     var user = $('#username').val();
     if (user == "") {
@@ -49,8 +61,6 @@ $("body").on("keyup", ".username", function (event) {
 });
 
 $("body").on("click", ".clear-input", function (event) {
-    origin_val = null;
-    origin_index = null;
     $(this).parent().parent().find("input").val("");
     $(this).css('display', 'none');
     if (PrevFocus) {
@@ -99,20 +109,20 @@ $("body").on("focus", ".des-input-code", function () {
 
 $("body").on("focus", ".des-input", function () {
     PrevFocus = $(this);
-    origin_index = $(this)[0].selectionStart;
 });
 
 var origin_val = null;
 var origin_index = null;
 $("body").on("keydown", ".des-input", function (e) {
-    if (e.keyCode === 32)
+    if(e.keyCode === 32)
         e.preventDefault();
     else {
         origin_index = $(this)[0].selectionStart + 1;
-        if ($(this)[0].selectionStart === 0) {
+        if($(this)[0].selectionStart === 0) {
             origin_val = null;
         }
     }
+    
 });
 
 $("body").on("input", ".des-input", function (e) {
@@ -121,7 +131,7 @@ $("body").on("input", ".des-input", function (e) {
     var end = $(this)[0].selectionEnd;
 
     //lọc whitespace và lấy giá trị con trỏ
-    if ($(this).val().match(/\s/)) {
+    if($(this).val().match(/\s/)) {
         var space_num = ($(this).val().match(/\s/g) || []).length
         start -= space_num;
         end -= space_num;
@@ -129,8 +139,8 @@ $("body").on("input", ".des-input", function (e) {
 
     //xoá bỏ hết whitespace
     var value = $(this).val().toString().replaceAll(" ", "");
-    if (origin_val !== null && origin_index !== null) {
-        if (e.originalEvent.data !== null && e.originalEvent.data !== " " && e.originalEvent.data !== $(this).val().substr(0, start)) {
+    if(origin_val !== null && origin_index !== null) {
+        if(e.originalEvent.data !== null && e.originalEvent.data !== " " && e.originalEvent.data !== $(this).val().substr(0 , start)) {
             value = insert(origin_val, origin_index - 1, e.originalEvent.data.slice(-1));
             start = origin_index;
             end = origin_index;
@@ -139,10 +149,10 @@ $("body").on("input", ".des-input", function (e) {
         }
     }
 
-    if (e.originalEvent.data === " ") {
+    if(e.originalEvent.data === " ") {
         origin_val = value;
     }
-
+    
     $(this).val(value);
     $(this)[0].selectionStart = start;
     $(this)[0].selectionEnd = end;
@@ -164,17 +174,17 @@ $(document).on('click', function (e) {
 });
 
 function ToggleHide(obj_input, type) {
+    if (PrevFocus) {
+        PrevFocus.focus();
+    }
+
     if (type == "password") {
         $(obj_input).addClass("password");
-        $(obj_input).prop('type','password');
+        $(obj_input).prop("type", "password");
     }
     else {
         $(obj_input).removeClass("password");
-        $(obj_input).prop('type','tel');
-    }
-
-    if (PrevFocus !== null) {
-        PrevFocus.focus();
+        $(obj_input).prop("type", "text");
     }
 
     if ($(obj_input + " + .input-action > .unhide").css("display") == 'flex') {
@@ -299,6 +309,51 @@ $("body").on("input", ".des-input-code", function (e) {
     } catch { }
 });
 
-$("body").on("paste", ".des-input-code", function (e) {
-    return false;
-});
+async function Redirect(url) {
+    sessionStorage.setItem("animation", "slide-in-right");
+    
+    if($(".intro-container").length > 0) {
+        await $("body").on("transitionend otransitionend webkitTransitionEnd",".intro-container", function () {
+            window.location.href = url;
+            $(".intro-container").unbind("transitionend otransitionend webkitTransitionEnd");
+        });
+
+        $(".intro-container").removeClass("slide-in-right");
+        $(".intro-container").addClass("slide-out-left");
+
+        
+    } else {
+        await $("body").on("transitionend otransitionend webkitTransitionEnd",".container", function () {
+            window.location.href = url;
+            $(".container").unbind("transitionend otransitionend webkitTransitionEnd");
+        });
+
+        $(".container").removeClass("slide-in-right");
+        $(".container").addClass("slide-out-left"); 
+    } 
+}
+
+async function GoBack() {
+    sessionStorage.setItem("animation", "slide-in-left");
+
+    if($(".intro-container").length > 0) {
+        await $("body").on("transitionend otransitionend webkitTransitionEnd",".intro-container", function () {
+            window.history.go(-1)
+            $(".intro-container").unbind("transitionend otransitionend webkitTransitionEnd");
+        });
+
+        $(".intro-container").removeClass("slide-in-right");
+        $(".intro-container").addClass("slide-out-right");
+    } else {
+        await $("body").on("transitionend otransitionend webkitTransitionEnd",".container", function () {
+            window.history.go(-1);
+            $(".container").unbind("transitionend otransitionend webkitTransitionEnd");
+        });
+
+        $(".container").removeClass("slide-in-right");
+        $(".container").addClass("slide-out-right");
+    }
+}
+
+
+

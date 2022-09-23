@@ -29,6 +29,12 @@
         width: auto;
         min-height: 100vh;
         transition-delay: 0.1s;
+        -webkit-transition-delay: 0.1s;
+        -moz-transition-delay: 0.1s;
+        overflow-x: hidden;
+    }
+
+    html {
         overflow-x: hidden;
     }
 
@@ -120,7 +126,7 @@
 
     .service-container {
         display: flex;
-        transform: translate(-18%, 0%);
+        transform: translate(-19%, 0%);
         width: 161%;
     }
 
@@ -173,6 +179,8 @@
     .partial {
         display: none;
         transition-delay: 0.1s;
+        -webkit-transition-delay: 0.1s;
+        -moz-transition-delay: 0.1s;
     }
 
     .partial.active {
@@ -200,8 +208,20 @@
     }
 
     @media (max-height: 800px) and (max-width: 500px) {
+        .partial.full {
+            min-height: calc(100vh - 343px) !important;
+        }
         .partial, .content, .err-content {
             min-height: calc(100vh - 420px) !important;
+        }
+
+        .main-image {
+            height: 200px !important;
+        }
+    
+        .main-image img {
+            height: initial !important;
+            max-height: 200px !important;
         }
     }
 
@@ -222,6 +242,15 @@
             width: 100%;
         }
 
+        .main-image {
+            height: 200px !important;
+        }
+    
+        .main-image img {
+            height: initial !important;
+            max-height: 200px !important;
+        }
+
         /* .partial {
             min-height: calc(750px * 0.5);
         }
@@ -232,6 +261,9 @@
 
         .partial, .content, .err-content {
             min-height: calc(100vh - 420px) !important;
+        }
+        .partial.full, .content.full, .err-content.full {
+            min-height: calc(100vh - 343px) !important;
         }
 
         .err-content {
@@ -263,7 +295,7 @@
             display: block;
             height: auto;
             border-radius: 10px;
-            padding: 20px 22px;
+            padding: 10px 0px;
         }
 
         .err-content {
@@ -291,9 +323,6 @@
         .container {
             height: fit-content !important;
             width: 80vw !important;
-        }
-        .action a {
-            padding: 10px !important;
         }
 
         .intro-container {
@@ -380,7 +409,7 @@
         display: block;
         width: 320px;
         border-radius: 10px;
-        padding: 20px 22px;
+        padding: 10px 0px;
     }
 
     .des-input-title {
@@ -402,11 +431,17 @@
         padding: 0;
         height: 50px;
         border: none;
+        background-color: #00000000;
         border-bottom: 1px solid var(--grey);
         font-weight: 700;
         transition: 0.3s !important;
         transition-delay: 0.15s !important;
+        -webkit-transition-delay: 0.15s !important;
+        -moz-transition-delay: 0.15s !important;
         -webkit-box-shadow: 0 0 0 30px white inset !important;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
     }
 
     input:-webkit-autofill,
@@ -447,6 +482,7 @@
 
     .des-input-code {
         color: var(--main_color);
+        background-color: #00000000;
         font-weight: 500;
         font-size: 24px;
         padding: 0;
@@ -459,6 +495,9 @@
         text-align: center;
         transition: .2s;
         caret-color: transparent;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
     }
 
     .des-input-code:focus {
@@ -574,11 +613,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 200px;
+        height: 265px;
     }
 
     .main-image img {
-        max-height: 200px;
+        height: 265px;
+        max-height: 300px;
     }
 
     .des-error {
@@ -611,6 +651,8 @@
         justify-content: center;
         transition: 0.3s;
         transition-delay: 0.15s;
+        -webkit-transition-delay: 0.15s;
+        -moz-transition-delay: 0.15s;
         height: 50px;
         padding: 0px 0px 0px 10px;
         border-bottom: 1px solid var(--grey);
@@ -738,7 +780,10 @@
     .description.bold {
         font-size: 16px;
         font-weight: 600;
-        line-height: 42px;
+        line-height: 24px;
+        display: block;
+        margin-top: 8px;
+        margin-bottom: 8px;
     }
 
     .checkbox.square > .checkmark {
@@ -1184,10 +1229,9 @@
   }
 
   .password {
+    font-family: 'text-security-disc';
     -webkit-text-security: disc;
     -moz-text-security: disc;
-    text-security: disc;
-    font-family: 'text-security-disc';
   }
 
   input::-webkit-input-placeholder {
@@ -1201,7 +1245,7 @@
   input:-moz-placeholder {
     font-family: 'Roboto', sans-serif;
   }
-  
-  input::-moz-placeholder {
+
+  input::placeholder {
     font-family: 'Roboto', sans-serif;
   }
