@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Tạo mật khẩu</title>
+    <title>Đăng ký</title>
 </head>
 <link href="css/font.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
@@ -10,44 +10,61 @@
 
 <script src="js/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
 <body>
     <section class="container fade-in">
-            <a href="javascript:void(0);" class="des-back"><i class="fa-solid fa-arrow-left"></i></a>
+        <a href="javascript:GoBack();" class="des-back"><i class="fa-solid fa-arrow-left"></i></a>
 
-            <div class="main-image">
-                <img src="images\CreatePassword.svg">
-            </div>
+        <div class="main-image">
+            <img src="images\SignUp.svg">
+        </div>
 
-            <h1>Tạo mật khẩu</h1>
+        <h1>Đăng ký</h1>
 
-            <div class="partial active">
-                <span class="des-input-title">PASSWORD</span>
-                <div class="input-container">
-                    <input type="text" id="password" class="des-input password"password" placeholder="Nhập mật khẩu">
-                    <div class="input-action">
-                        <span class="input-error">!</span>
-                        <span class="eye-input unhide" style="display: flex;"
-                            onclick="ToggleHide('#password', 'text')"><i class="fa-solid fa-eye"></i></span>
-                        <span class="eye-input hide" onclick="ToggleHide('#password', 'password')"><i
-                                class="fa-solid fa-eye-slash"></i></span>
-                    </div>
+        <div class="partial sign active">
+            <span class="des-input-title">USERNAME</span>
+            <div class="input-container">
+                <input type="text" id="username" class="des-input username" placeholder="Nhập số điện thoại/email">
+                <div class="input-action">
+                    <span class="input-error">!</span>
+                    <span class="clear-input" onclick="clear('username')"><i class="fa-solid fa-xmark"></i></span>
                 </div>
-                <span class="des-error">Đã có lỗi xảy ra</span>
-
-                <span class="des-input-title">REPEAT PASSWORD</span>
-                <div class="input-container">
-                    <input type="text" id="repassword" class="des-input password" placeholder="Nhập lại mật khẩu">
-                    <div class="input-action">
-                        <span class="input-error">!</span>
-                        <span class="eye-input unhide" style="display: flex;"
-                            onclick="ToggleHide('#repassword', 'text')"><i class="fa-solid fa-eye"></i></span>
-                        <span class="eye-input hide" onclick="ToggleHide('#repassword', 'password')"><i
-                                class="fa-solid fa-eye-slash"></i></span>
-                    </div>
-                </div>
-                <span class="des-error">Đã có lỗi xảy ra</span>
             </div>
-            <a href="javascript:Continue()" class="des-btn">Tiếp tục</a>
+            <span class="des-error">Đã có lỗi xảy ra</span>
+
+            <span class="des-input-title">PASSWORD</span>
+            <div class="input-container">
+                <input type="text" id="password" class="des-input password" placeholder="Nhập mật khẩu">
+                <div class="input-action">
+                    <span class="input-error">!</span>
+                    <span class="eye-input unhide" style="display: flex;"
+                        onclick="ToggleHide('#password', 'text')"><i class="fa-solid fa-eye"></i></span>
+                    <span class="eye-input hide" onclick="ToggleHide('#password', 'password')"><i
+                            class="fa-solid fa-eye-slash"></i></span>
+                </div>
+            </div>
+            <span class="des-error">Đã có lỗi xảy ra</span>
+
+            <span class="des-input-title">REPEAT PASSWORD</span>
+            <div class="input-container">
+                <input type="text" id="repassword" class="des-input password" placeholder="Nhập lại mật khẩu">
+                <div class="input-action">
+                    <span class="input-error">!</span>
+                    <span class="eye-input unhide" style="display: flex;"
+                        onclick="ToggleHide('#repassword', 'text')"><i class="fa-solid fa-eye"></i></span>
+                    <span class="eye-input hide" onclick="ToggleHide('#repassword', 'password')"><i
+                            class="fa-solid fa-eye-slash"></i></span>
+                </div>
+            </div>
+            <span class="des-error">Đã có lỗi xảy ra</span>
+        </div>
+        <label class="checkbox">
+            Tôi đồng ý các <a href="javascript:Redirect('Term.html')">điều khoản</a> và <a href="javascript:Redirect('Term.html')">chính
+                sách</a>
+            <input type="checkbox">
+            <span class="checkmark"></span>
+        </label>
+        <a href="javascript:Redirect('Result.html')" style="margin-top: 0px;" class="des-btn">Tiếp tục</a>
     </section>
 </body>
 <script src="js/sso-library.js"></script>

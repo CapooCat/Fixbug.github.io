@@ -181,6 +181,17 @@ function ToggleHide(obj_input, type) {
         $(obj_input).removeClass("password");
     }
 
+    if(typeof InstallTrigger !== 'undefined') {
+        if (type == "password") {
+            $(obj_input).addClass("password");
+            $(obj_input).prop("type", "password");
+        }
+        else {
+            $(obj_input).removeClass("password");
+            $(obj_input).prop("type", "password");
+        } 
+    }
+
     if (PrevFocus) {
         PrevFocus.focus();
     }
