@@ -188,10 +188,12 @@ function ToggleHide(obj_input, type) {
         }
     } else {
         if (type == "password" || $(obj_input)[0].type == "password") {
-            $(obj_input).removeClass("password").addClass("password");
+            $(obj_input).addClass("password");
+            $("#test").html("hide password");
         }
         else {
-            $(obj_input).addClass("password").removeClass("password");
+            $(obj_input).removeClass("password");
+            $("#test").html("show password");
         }
     }
 
