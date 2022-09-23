@@ -170,7 +170,7 @@ function ToggleHide(obj_input, type) {
     }
     else {
         $(obj_input).removeClass("password");
-        $(obj_input).prop('type','text');
+        $(obj_input).prop('type','tel');
     }
 
     if (PrevFocus !== null) {
