@@ -180,14 +180,14 @@ if(typeof InstallTrigger !== 'undefined') {
 
 function ToggleHide(obj_input, type) {
     if (typeof InstallTrigger !== 'undefined') {
-        if (type == "password") {
+        if (type == "password" || $(obj_input)[0].type == "password") {
             $(obj_input).prop("type", "password");
         }
         else {
             $(obj_input).prop("type", "text");
         }
     } else {
-        if (type == "password") {
+        if (type == "password" || $(obj_input)[0].type == "password") {
             $(obj_input).removeClass("password").addClass("password");
         }
         else {
