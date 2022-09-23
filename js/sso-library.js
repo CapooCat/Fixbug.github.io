@@ -173,23 +173,26 @@ $(document).on('click', function (e) {
     }
 });
 
-function ToggleHide(obj_input, type) {
-    if (type == "password") {
-        $(obj_input).addClass("password");
-    }
-    else {
-        $(obj_input).removeClass("password");
-    }
+if(typeof InstallTrigger !== 'undefined') {
+    $(".des-input.password, .des-input-code.password").prop("type", "password");
+    $(".des-input.password, .des-input-code.password").removeClass("password");
+}
 
-    if(typeof InstallTrigger !== 'undefined') {
+function ToggleHide(obj_input, type) {
+    if (typeof InstallTrigger !== 'undefined') {
         if (type == "password") {
-            $(obj_input).addClass("password");
             $(obj_input).prop("type", "password");
         }
         else {
+            $(obj_input).prop("type", "text");
+        }
+    } else {
+        if (type == "password") {
+            $(obj_input).addClass("password");
+        }
+        else {
             $(obj_input).removeClass("password");
-            $(obj_input).prop("type", "password");
-        } 
+        }
     }
 
     if (PrevFocus) {
