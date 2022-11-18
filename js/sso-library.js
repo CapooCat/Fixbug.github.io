@@ -17,10 +17,10 @@ $(document).ready(function() {
         sessionStorage.removeItem("animation");
     }
 
-    // if(isIOSDevice()) {
-    //     $('input[type=text].des-input.password').prop("type", "password");
-    //     $('input[type=password].des-input.password').removeClass("password");
-    // }
+    if(isIOSDevice()) {
+        $('input[type=text].des-input.password').prop("type", "password");
+        $('input[type=password].des-input.password').removeClass("password");
+    }
 });
 
 function ContinueUsername() {
@@ -188,10 +188,7 @@ if(navigator.userAgent.indexOf("Firefox") > -1 ) {
 }
 
 function ToggleHide(obj_input, type) {
-    if(isIOSDevice() && $(obj_input).hasClass('password')) {
-        $(obj_input).toggleClass("password");  
-    }
-    else if (navigator.userAgent.indexOf("Firefox") > -1) {
+    if (navigator.userAgent.indexOf("Firefox") > -1 || isIOSDevice()) {
         $(obj_input).removeClass("password");
     } else {
         if (type == "password") {
@@ -201,7 +198,6 @@ function ToggleHide(obj_input, type) {
             $(obj_input).removeClass("password");
         }
     }
-
     $(obj_input).prop("type", type);
 
     if (PrevFocus) {
