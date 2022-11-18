@@ -187,24 +187,24 @@ if(navigator.userAgent.indexOf("Firefox") > -1 ) {
     $(".des-input.password, .des-input-code.password").removeClass("password");
 }
 
-function ToggleHide(obj_input, type) {
+async function ToggleHide(obj_input, type) {
     if(isIOSDevice()) {
-        $('.des-input.password').removeClass("password");
-        $(obj_input).prop("type", type);
+        await $('.des-input.password').removeClass("password");
+        
     }
     else if (navigator.userAgent.indexOf("Firefox") > -1) {
-        $(obj_input).removeClass("password");
-        $(obj_input).prop("type", type);
+        await $(obj_input).removeClass("password");
+       
     } else {
         if (type == "password") {
-            $(obj_input).addClass("password");       
+            await $(obj_input).addClass("password");       
         }
         else {
-            $(obj_input).removeClass("password");
+            await $(obj_input).removeClass("password");
         }
-        
-        $(obj_input).prop("type", type);
     }
+
+    $(obj_input).prop("type", type);
 
     if (PrevFocus) {
         PrevFocus.focus();
