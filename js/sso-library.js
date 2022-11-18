@@ -17,10 +17,10 @@ $(document).ready(function() {
         sessionStorage.removeItem("animation");
     }
 
-    if(isIOSDevice()) {
-        $('input[type=text].des-input.password').prop("type", "password");
-        $('input[type=password].des-input.password').removeClass("password");
-    }
+    // if(isIOSDevice()) {
+    //     $('input[type=text].des-input.password').prop("type", "password");
+    //     $('input[type=password].des-input.password').removeClass("password");
+    // }
 });
 
 function ContinueUsername() {
@@ -188,39 +188,23 @@ if(navigator.userAgent.indexOf("Firefox") > -1 ) {
 }
 
 function ToggleHide(obj_input, type) {
-    if (navigator.userAgent.indexOf("Firefox") > -1) {
-        if (type == "password") {
-            $(obj_input).prop("type", "password");
+        if(isIOSDevice()) {
+            $(obj_input).removeClass("password");
+            $(obj_input).prop("type", type);
         }
-        else {
-            $(obj_input).prop("type", "text");
-        }
-    } else {
-        if (type == "password") {
-            if($(obj_input).hasClass("des-input")) {
-                if(isIOSDevice()) {
-                    $(obj_input).prop("type", "password");
-                } else {
-                    $(obj_input).addClass("password");
-                    $(obj_input).prop("type", "password");
-                }
-            } else {
-                $(obj_input).addClass("password");
+        else if (navigator.userAgent.indexOf("Firefox") > -1) {
+            $(obj_input).removeClass("password");
+            $(obj_input).prop("type", type);
+        } else {
+            if (type == "password") {
+                $(obj_input).addClass("password");       
             }
-        }
-        else {
-            if($(obj_input).hasClass("des-input")) {
-                if(isIOSDevice()) {
-                    $(obj_input).prop("type", "text");
-                } else {
-                    $(obj_input).removeClass("password");
-                    $(obj_input).prop("type", "text");
-                }
-            } else {
+            else {
                 $(obj_input).removeClass("password");
             }
+            
+            $(obj_input).prop("type", type);
         }
-    }
 
     if (PrevFocus) {
         PrevFocus.focus();
