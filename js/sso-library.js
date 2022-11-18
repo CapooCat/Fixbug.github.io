@@ -183,12 +183,6 @@ function isIOSDevice(){
  }
 
 function ToggleHide(obj_input, type) {
-    if(isIOSDevice()){
-        $("#test").html("IOS");
-    } else {
-        $("#test").html("not IOS");
-    }
-   
     if (navigator.userAgent.indexOf("Firefox") > -1) {
         if (type == "password") {
             $(obj_input).prop("type", "password");
@@ -199,16 +193,16 @@ function ToggleHide(obj_input, type) {
     } else {
         if (type == "password") {
             if($(obj_input).hasClass("des-input")) {
-                $(obj_input).prop("type", "password");
                 $(obj_input).addClass("password");
+                $(obj_input).prop("type", "password");
             } else {
                 $(obj_input).addClass("password");
             }
         }
         else {
             if($(obj_input).hasClass("des-input")) {
-                $(obj_input).prop("type", "text");
                 $(obj_input).removeClass("password");
+                $(obj_input).prop("type", "text");
             } else {
                 $(obj_input).removeClass("password");
             }
