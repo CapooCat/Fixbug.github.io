@@ -3,6 +3,10 @@
     $('#LoginForm').trigger('submit');
 };
 
+function isIOSDevice(){
+    return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+ }
+
 $(document).ready(function() {
     var animate = sessionStorage.getItem("animation");
     if(animate !== null && animate !== "") {
@@ -12,6 +16,12 @@ $(document).ready(function() {
         $(".intro-container").addClass(animate);
         sessionStorage.removeItem("animation");
     }
+
+    if(isIOSDevice()) {
+        $('input[type=text]').hasClass("des-input").removeClass("password");
+        $('input[type=text]').hasClass("des-input").prop("type", "password");
+    }
+    
 });
 
 function ContinueUsername() {
@@ -178,10 +188,6 @@ if(navigator.userAgent.indexOf("Firefox") > -1 ) {
     $(".des-input.password, .des-input-code.password").removeClass("password");
 }
 
-function isIOSDevice(){
-    return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
- }
-
 function ToggleHide(obj_input, type) {
     if (navigator.userAgent.indexOf("Firefox") > -1) {
         if (type == "password") {
@@ -193,16 +199,24 @@ function ToggleHide(obj_input, type) {
     } else {
         if (type == "password") {
             if($(obj_input).hasClass("des-input")) {
-                $(obj_input).addClass("password");
-                $(obj_input).prop("type", "password");
+                if(isIOSDevice()) {
+                    $(obj_input).prop("type", "password");
+                } else {
+                    $(obj_input).addClass("password");
+                    $(obj_input).prop("type", "password");
+                }
             } else {
                 $(obj_input).addClass("password");
             }
         }
         else {
             if($(obj_input).hasClass("des-input")) {
-                $(obj_input).removeClass("password");
-                $(obj_input).prop("type", "text");
+                if(isIOSDevice()) {
+                    $(obj_input).prop("type", "text");
+                } else {
+                    $(obj_input).removeClass("password");
+                    $(obj_input).prop("type", "text");
+                }
             } else {
                 $(obj_input).removeClass("password");
             }
