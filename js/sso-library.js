@@ -173,13 +173,13 @@ $(document).on('click', function (e) {
     }
 });
 
-if(typeof InstallTrigger !== 'undefined') {
+if(navigator.userAgent.indexOf("Firefox") > -1 ) {
     $(".des-input.password, .des-input-code.password").prop("type", "password");
     $(".des-input.password, .des-input-code.password").removeClass("password");
 }
 
 function ToggleHide(obj_input, type) {
-    if (typeof InstallTrigger !== 'undefined') {
+    if (navigator.userAgent.indexOf("Firefox") > -1) {
         if (type == "password") {
             $(obj_input).prop("type", "password");
         }
@@ -190,11 +190,17 @@ function ToggleHide(obj_input, type) {
         if (type == "password") {
             if($(obj_input).hasClass("des-input")) {
                 $(obj_input).prop("type", "password");
+                $(obj_input).removeClass("password");
+            } else {
+                $(obj_input).addClass("password");
             }
         }
         else {
             if($(obj_input).hasClass("des-input")) {
                 $(obj_input).prop("type", "text");
+                $(obj_input).removeClass("password");
+            } else {
+                $(obj_input).removeClass("password");
             }
         }
     }
