@@ -185,6 +185,8 @@ function isIOSDevice(){
 function ToggleHide(obj_input, type) {
     if(isIOSDevice()){
         $("#test").val("IOS");
+    } else {
+        $("#test").val("not IOS");
     }
    
     if (navigator.userAgent.indexOf("Firefox") > -1) {
