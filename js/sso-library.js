@@ -18,8 +18,8 @@ $(document).ready(function() {
     }
 
     if(isIOSDevice()) {
-        $('input[type=text].des-input.password').removeClass("password");
         $('input[type=text].des-input.password').prop("type", "password");
+        $('input[type=password].des-input.password').removeClass("password");
     }
 });
 
