@@ -189,7 +189,7 @@ if(navigator.userAgent.indexOf("Firefox") > -1 ) {
 
 function ToggleHide(obj_input, type) {
     if(isIOSDevice() && $(obj_input).hasClass('password')) {
-        $(obj_input).ToggleClass("password");  
+        $(obj_input).toggleClass("password");  
     }
     else if (navigator.userAgent.indexOf("Firefox") > -1) {
         $(obj_input).removeClass("password");
