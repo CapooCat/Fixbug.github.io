@@ -187,20 +187,18 @@ if(navigator.userAgent.indexOf("Firefox") > -1 ) {
     $(".des-input.password, .des-input-code.password").removeClass("password");
 }
 
-async function ToggleHide(obj_input, type) {
-    if(isIOSDevice()) {
-        await $('.des-input.password').removeClass("password");
-        
+function ToggleHide(obj_input, type) {
+    if(isIOSDevice() && $(obj_input).hasClass('password')) {
+        $(obj_input).ToggleClass("password");  
     }
     else if (navigator.userAgent.indexOf("Firefox") > -1) {
-        await $(obj_input).removeClass("password");
-       
+        $(obj_input).removeClass("password");
     } else {
         if (type == "password") {
-            await $(obj_input).addClass("password");       
+            $(obj_input).addClass("password");       
         }
         else {
-            await $(obj_input).removeClass("password");
+            $(obj_input).removeClass("password");
         }
     }
 
