@@ -190,17 +190,11 @@ function ToggleHide(obj_input, type) {
         if (type == "password") {
             if($(obj_input).hasClass("des-input")) {
                 $(obj_input).prop("type", "password");
-                $(obj_input).removeClass("password");
-            } else {
-                $(obj_input).addClass("password");
             }
         }
         else {
             if($(obj_input).hasClass("des-input")) {
                 $(obj_input).prop("type", "text");
-                $(obj_input).removeClass("password");
-            } else {
-                $(obj_input).removeClass("password");
             }
         }
     }
