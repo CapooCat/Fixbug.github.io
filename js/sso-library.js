@@ -18,10 +18,10 @@ $(document).ready(function() {
     }
 
     if(isIOSDevice()) {
-        $('input[type=text]').hasClass("des-input").removeClass("password");
-        $('input[type=text]').hasClass("des-input").prop("type", "password");
+        $('input[type=text].des-input').removeClass("password");
+        $('input[type=text].des-input').prop("type", "password");
+        $('#test').html('123');
     }
-    
 });
 
 function ContinueUsername() {
