@@ -192,13 +192,15 @@ function ToggleHide(obj_input, type) {
         $(obj_input).removeClass("password");
     } else {
         if (type == "password") {
-            $(obj_input).addClass("password");       
+            $(obj_input).addClass("password");    
         }
         else {
             $(obj_input).removeClass("password");
         }
     }
-    $(obj_input).prop("type", type);
+
+    if($(obj_input).hasClass('.des-input'))
+        $(obj_input).prop("type", type);
 
     if (PrevFocus) {
         PrevFocus.focus();
