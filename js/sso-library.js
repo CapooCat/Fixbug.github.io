@@ -188,23 +188,23 @@ if(navigator.userAgent.indexOf("Firefox") > -1 ) {
 }
 
 function ToggleHide(obj_input, type) {
-        if(isIOSDevice()) {
-            $(obj_input).removeClass("password");
-            $(obj_input).prop("type", type);
+    if(isIOSDevice()) {
+        $('.des-input.password').removeClass("password");
+        $(obj_input).prop("type", type);
+    }
+    else if (navigator.userAgent.indexOf("Firefox") > -1) {
+        $(obj_input).removeClass("password");
+        $(obj_input).prop("type", type);
+    } else {
+        if (type == "password") {
+            $(obj_input).addClass("password");       
         }
-        else if (navigator.userAgent.indexOf("Firefox") > -1) {
+        else {
             $(obj_input).removeClass("password");
-            $(obj_input).prop("type", type);
-        } else {
-            if (type == "password") {
-                $(obj_input).addClass("password");       
-            }
-            else {
-                $(obj_input).removeClass("password");
-            }
-            
-            $(obj_input).prop("type", type);
         }
+        
+        $(obj_input).prop("type", type);
+    }
 
     if (PrevFocus) {
         PrevFocus.focus();
