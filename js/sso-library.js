@@ -199,7 +199,7 @@ function ToggleHide(obj_input, type) {
         }
     }
 
-    if($(obj_input).hasClass('.des-input'))
+    if($(obj_input).hasClass('des-input'))
         $(obj_input).prop("type", type);
 
     if (PrevFocus) {
