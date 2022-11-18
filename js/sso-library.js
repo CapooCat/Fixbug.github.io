@@ -178,6 +178,13 @@ if(navigator.userAgent.indexOf("Firefox") > -1 ) {
     $(".des-input.password, .des-input-code.password").removeClass("password");
 }
 
+function isIOSDevice(){
+    return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+ }
+ if(isIOSDevice()){
+     $("#test").val("IOS");
+ }
+
 function ToggleHide(obj_input, type) {
     if (navigator.userAgent.indexOf("Firefox") > -1) {
         if (type == "password") {
