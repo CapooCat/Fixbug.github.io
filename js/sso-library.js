@@ -17,10 +17,10 @@ $(document).ready(function() {
         sessionStorage.removeItem("animation");
     }
 
-    // if(isIOSDevice()) {
-    //     $('input[type=text].des-input.password').prop("type", "password");
-    //     $('input[type=password].des-input.password').removeClass("password");
-    // }
+    if(isIOSDevice()) {
+        $('input[type=text].des-input.password').prop("type", "password");
+        $('input[type=password].des-input.password').removeClass("password");
+    }
 });
 
 function ContinueUsername() {
