@@ -181,11 +181,12 @@ if(navigator.userAgent.indexOf("Firefox") > -1 ) {
 function isIOSDevice(){
     return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
  }
- if(isIOSDevice()){
-     $("#test").val("IOS");
- }
 
 function ToggleHide(obj_input, type) {
+    if(isIOSDevice()){
+        $("#test").val("IOS");
+    }
+   
     if (navigator.userAgent.indexOf("Firefox") > -1) {
         if (type == "password") {
             $(obj_input).prop("type", "password");
