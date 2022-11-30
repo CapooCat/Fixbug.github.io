@@ -34,6 +34,14 @@
         background-attachment: fixed;
     }
 
+    .partial h2 {
+        margin: auto;
+        letter-spacing: 0.5px;
+        font-size: 22px;
+        font-weight: 800;
+        text-align: center;
+    }
+
     /* .background::after {
         content: '';
         position: absolute;
@@ -538,14 +546,6 @@
     .top-title h3 {
         margin: 15px;
         font-weight: 800;
-    }
-
-    .partial h2 {
-        margin: auto;
-        letter-spacing: 0.5px;
-        font-size: 22px;
-        font-weight: 800;
-        text-align: center;
     }
 
     .top-title span {
