@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Tạo mới mật khẩu</title>
+    <title>Yêu cầu truy cập</title>
 </head>
 <link href="css/font.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
@@ -10,96 +10,39 @@
 
 <script src="js/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
 <body>
     <section class="container fade-in">
-        <a href="javascript:void(0);" class="des-back"><i class="fa-solid fa-arrow-left"></i></a>
-
-        <div class="main-image">
-            <img src="images\ResetPassword.svg">
-        </div>
-        <h1>Tạo mới mật khẩu</h1>
-        <span class="Note">Tạo thêm password để tăng tính bảo mật</span>
-
-        <div class="partial">
-            <div style="display: block;">
-                <span class="des-input-title">USERNAME</span>
-                <div class="input-container">
-                    <input type="text" id="username" class="des-input password" placeholder="Nhập số điện thoại/email">
-                    <div class="input-action">
-                        <span class="input-error">!</span>
-                        <span class="clear-input" onclick="clear('username')"><i class="fa-solid fa-xmark"></i></span>
-                    </div>
-                </div>
-                <span class="des-error">Đã có lỗi xảy ra</span>
+            <div class="main-image">
+                <img src="images\Logout.svg">
             </div>
-        </div>
 
-        <div class="partial active">
-            <span class="des-input-title">PASSWORD</span>
-            <div class="input-container">
-                <input type="text" id="password" class="des-input" placeholder="Nhập mật khẩu">
+            <div class="top-title login">
+                <img src="images\FPT_ID.svg">
+                <h2>Chuyển tài khoản FPT ID</h2>
             </div>
-            <span class="des-error">Đã có lỗi xảy ra</span>
-            <span class="des-input-title">REPEAT PASSWORD</span>
-            <div class="input-container">
-                <input type="text" id="repassword" class="des-input password" placeholder="Nhập lại mật khẩu">
-                <div class="input-action">
-                    <span class="input-error">!</span>
-                    <span class="eye-input unhide" style="display: flex;"
-                        onclick="ToggleHide('#repassword', 'text')"><i class="fa-solid fa-eye"></i></span>
-                    <span class="eye-input hide" onclick="ToggleHide('#repassword', 'password')"><i
-                            class="fa-solid fa-eye-slash"></i></span>
-                </div>
-            </div>
-            <span class="des-error">Đã có lỗi xảy ra</span>
-        </div>
 
-        <div class="partial active">
-            <span class="des-input-title">PASSWORD 6 SỐ</span>
-            <div class="input-container">
-                <input type="text" class="des-input-code code password" pattern="[0-9]*" inputmode="numeric">
-                <input type="text" class="des-input-code code password" pattern="[0-9]*" inputmode="numeric">
-                <input type="text" class="des-input-code code password" pattern="[0-9]*" inputmode="numeric">
-                <input type="text" class="des-input-code code password" pattern="[0-9]*" inputmode="numeric">
-                <input type="text" class="des-input-code code password" pattern="[0-9]*" inputmode="numeric">
-                <input type="text" class="des-input-code code password" pattern="[0-9]*" inputmode="numeric">
-
-                <div class="input-action" style="border: none;">
-                    <span class="eye-input unhide" style="display: flex;"
-                        onclick="ToggleHide('.code', 'text')"><i class="fa-solid fa-eye"></i></span>
-                    <span class="eye-input hide" onclick="ToggleHide('.code', 'password')"><i
-                            class="fa-solid fa-eye-slash"></i></span>
-                </div>
-            </div>
-            <span class="des-error">Đã có lỗi xảy ra</span>
-            <span class="des-input-title">REPEAT PASSWORD 6 SỐ</span>
-            <div class="input-container">
-                <input type="text" class="des-input-code recode password" pattern="[0-9]*" inputmode="numeric">
-                <input type="text" class="des-input-code recode password" pattern="[0-9]*" inputmode="numeric">
-                <input type="text" class="des-input-code recode password" pattern="[0-9]*" inputmode="numeric">
-                <input type="text" class="des-input-code recode password" pattern="[0-9]*" inputmode="numeric">
-                <input type="text" class="des-input-code recode password" pattern="[0-9]*" inputmode="numeric">
-                <input type="text" class="des-input-code recode password" pattern="[0-9]*" inputmode="numeric">
-
-                <div class="input-action" style="border: none;">
-                    <span class="eye-input unhide" style="display: flex;"
-                        onclick="ToggleHide('.recode', 'text')"><i class="fa-solid fa-eye"></i></span>
-                    <span class="eye-input hide" onclick="ToggleHide('.recode', 'password')"><i
-                            class="fa-solid fa-eye-slash"></i></span>
-                </div>
-            </div>
-            <span class="des-error">Đã có lỗi xảy ra</span>
-        </div>
-
-        <div class="partial">
-            <span class="description">Bạn đã nhập sai mật khẩu 3 lần. Nhấn tiếp tục để đặt lại mật khẩu.</span>
-        </div>
-
-        <a href="javascript:Continue();" id="next" class="des-btn">Tiếp tục</a>
-        <div id="test"></div>
+            <div class="partial active">   
+                <div class="list-user-login">
+                    <span class="title">Tài khoản</span>
+                    <a class="item" href="javascript:void(0)">
+                        <div class="avatar">C</div><span>Châu Tinh Trì</span>
+                    </a>
+                    <a class="item" href="javascript:void(0)">
+                        <div class="avatar">C</div><span>chautinhtri@gmail.com</span>
+                    </a>
+                    <a class="item" href="javascript:void(0)">
+                        <div class="avatar">0</div><span>0905854930</span>
+                    </a>
+                    <a class="item" href="javascript:void(0)">
+                        <div class="avatar">A</div><span>abc@gmail.com</span>
+                    </a>
+                    <a class="item add" href="javascript:void(0)">
+                        <div class="avatar"><i class="fa-solid fa-plus"></i></div><span>Đăng nhập tài khoản khác</span>
+                    </a>
+                </div> 
+            </div> 
+            <a href="javascript:void(0)" class="des-btn flexible"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Đăng xuất tất cả tài khoản</span></a>  
     </section>
-    
 </body>
 <script src="js/sso-library.js"></script>
 </html>
