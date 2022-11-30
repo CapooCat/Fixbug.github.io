@@ -540,10 +540,12 @@
         font-weight: 800;
     }
 
-    .top-title h2 {
+    .partial h2 {
         margin: auto;
         letter-spacing: 0.5px;
         font-size: 22px;
+        font-weight: 800;
+        text-align: center;
     }
 
     .top-title span {
