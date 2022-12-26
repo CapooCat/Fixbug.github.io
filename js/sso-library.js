@@ -221,12 +221,10 @@ function Loading(x) {
     if (x == 1) {
         $(".des-btn").addClass("des-btn-block");
         $(".des-btn").removeClass("des-btn");
-        $("input").prop("disabled", true);
     }
     else {
         $(".des-btn-block").addClass("des-btn");
         $(".des-btn-block").removeClass("des-btn-block");
-        $("input").prop("disabled", false);
     }
 }
 
@@ -791,4 +789,4 @@ async function GoBack() {
         $(".container").addClass("slide-out-right");
     }
 }
-//#endregion
+//#endregion 
