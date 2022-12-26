@@ -351,7 +351,7 @@ html {
         overflow: hidden;
         align-content: space-between;
         box-sizing: border-box;
-        height: -webkit-fill-available;
+        height: fit-content;
         border-radius: none;
         padding: 20px 0px !important;
         padding-bottom: 0px !important;
@@ -368,9 +368,9 @@ html {
             box-sizing: border-box;
         }
 
-        html.full {
+        html.full body {
+            height: -webkit-fill-available;
             display: flex;
-            justify-content: center;
             align-items: center;
         }
 
