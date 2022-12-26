@@ -287,8 +287,7 @@ html {
 @media (max-width: 500px) {
     body {
         align-items: flex-start;
-        height: 100vh;
-        height: -webkit-fill-available;
+        height: fit-content;
     }
 
     .des-btn {
