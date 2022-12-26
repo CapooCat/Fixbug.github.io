@@ -203,6 +203,10 @@ function FooterHeaderAlign() {
     } else {
         $(".header").css("margin-bottom", "0");
     }
+
+    if($(".container").hasClass("full")) {
+        $("html").addClass("full");
+    }
 }
 
 function MarginOverflow() {

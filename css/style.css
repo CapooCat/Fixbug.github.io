@@ -379,11 +379,15 @@ html {
             box-sizing: border-box;
         }
 
-        .container.full {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+    html.full {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    html.full .container {
+        padding: 0px !important;
+    }
 
 
     .background {
