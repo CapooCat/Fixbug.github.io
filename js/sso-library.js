@@ -199,7 +199,7 @@ $(window).resize(function () {
 function FooterHeaderAlign() {
     if ($(window).width() < 500) {
         let footerH = $(".footer").outerHeight();
-        $(".header").css("padding-bottom", "0");
+        $(".container").css("padding-bottom", "0");
         $(".header").css("margin-bottom", footerH);
     } else {
         $(".header").css("margin-bottom", "0");
