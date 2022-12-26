@@ -65,18 +65,6 @@ html {
     text-align: center;
     overflow: hidden;
     z-index: -9999;
-    /* width: 100vw;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        background: white;
-        background-image: url("../images/wave.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed; */
 }
 
 body {
@@ -296,9 +284,8 @@ html {
 }
 
 @media (max-width: 500px) {
-    body {
-        align-items: flex-start;
-        min-height: fit-content !important;
+    body, html {
+        height: 100%;
     }
 
     .des-btn {
@@ -362,8 +349,8 @@ html {
         overflow: hidden;
         align-content: space-between;
         box-sizing: border-box;
-        height: fit-content;
         border-radius: none;
+        height: 100%;
         padding: 20px 0px !important;
         padding-bottom: 0px !important;
         box-shadow: none !important;
@@ -378,12 +365,6 @@ html {
             align-content: space-between;
             box-sizing: border-box;
         }
-
-
-    html.full body {
-        height: 100%;
-        align-content: center;
-    }
 
     .background {
         display: none;
