@@ -285,11 +285,6 @@ html {
 }
 
 @media (max-width: 500px) {
-    body {
-        align-items: flex-start;
-        min-height: fit-content !important;
-    }
-
     .des-btn {
         margin-top: 5px !important;
     }
@@ -351,6 +346,7 @@ html {
         overflow: hidden;
         align-content: space-between;
         box-sizing: border-box;
+        height: 100vh;
         height: -webkit-fill-available;
         border-radius: none;
         padding: 20px 0px !important;
@@ -369,10 +365,9 @@ html {
         }
 
         html.full body {
-            height: 100vh;
-            height: -webkit-fill-available;
             display: flex;
-            align-items: center;
+            align-content: center;
+            flex-wrap: wrap;
         }
 
     .background {
