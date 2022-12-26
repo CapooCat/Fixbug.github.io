@@ -369,6 +369,7 @@ html {
         }
 
         html.full body {
+            height: 100vh;
             height: -webkit-fill-available;
             display: flex;
             align-items: center;
