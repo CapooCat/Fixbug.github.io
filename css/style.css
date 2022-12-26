@@ -361,9 +361,10 @@ html {
         overflow: hidden;
         align-content: space-between;
         box-sizing: border-box;
-        height: calc(99vh);
+        height: fit-content;
         border-radius: none;
         padding: 20px 0px !important;
+        padding-bottom: 0px !important;
         box-shadow: none !important;
         position: relative;
     }
