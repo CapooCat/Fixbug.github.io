@@ -11,6 +11,7 @@
 }
 
 html {
+    height: 100vh;
     height: -webkit-fill-available;
 }
 
@@ -350,7 +351,7 @@ html {
         overflow: hidden;
         align-content: space-between;
         box-sizing: border-box;
-        height: fit-content;
+        height: -webkit-fill-available;
         border-radius: none;
         padding: 20px 0px !important;
         padding-bottom: 0px !important;
@@ -365,6 +366,12 @@ html {
             flex-wrap: wrap;
             align-content: space-between;
             box-sizing: border-box;
+        }
+
+        html.full {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
     .background {
