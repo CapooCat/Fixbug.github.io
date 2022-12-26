@@ -192,7 +192,18 @@ function CustomDatePicker() {
 
 $(window).resize(function () {
     MarginOverflow();
+    FooterHeaderAlign();
 });
+
+function FooterHeaderAlign() {
+    if ($(window).width() < 500) {
+        let footerH = $(".footer").outerHeight();
+        $(".header").css("padding-bottom", footerH);
+    } else {
+        $(".header").css("padding-bottom", "0");
+    }
+}
+
 
 function MarginOverflow() {
     if ($(".container").outerHeight() > $(window).height() && $(window).width() > 625) {
@@ -227,6 +238,8 @@ function Loading(x) {
         $(".des-btn-block").removeClass("des-btn-block");
     }
 }
+
+
 
 /*click button on enter*/
 function ClickButtonOnEnter() {
