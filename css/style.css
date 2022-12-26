@@ -379,16 +379,11 @@ html {
             box-sizing: border-box;
         }
 
-    html.full {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 
-    html.full .container {
-        padding: 0px !important;
+    html.full body {
+        height: 100%;
+        align-content: center;
     }
-
 
     .background {
         display: none;
