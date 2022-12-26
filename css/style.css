@@ -577,7 +577,7 @@ input[type=number] {
 }
 
 .top-title {
-    margin: 0px 20px 0px 20px;
+    margin: 0px 20px 20px 20px;
     text-align: center;
 }
 
@@ -656,7 +656,6 @@ h1 {
     border: 1px solid var(--main_color);
     font-weight: 600;
     min-height: 30px;
-    margin-top: 30px;
     transition: margin 0s, background-color .3s, color .3s;
     -webkit-transition: margin 0s, background-color .3s, color .3s;
     -moz-transition: margin 0s, background-color .3s, color .3s;
@@ -756,6 +755,7 @@ h1 {
     font-size: 14px;
     font-weight: 400;
     color: #FF0000;
+    padding: 0px 0px 15px 0px
 }
 
 .input-container {
@@ -1548,6 +1548,7 @@ input::placeholder {
     border-radius: 10px;
     border: 1px solid var(--main_color);
     margin-top: 20px;
+    margin-bottom: 20px;
     display: block;
     position: relative;
 }

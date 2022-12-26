@@ -5,7 +5,14 @@
 window.SubmitForm = (x) => {
     $('#'+x).trigger('submit');
 };
-
+window.GetInputValue = (x) => {
+    var value = document.getElementById(x).value
+    return value;
+};
+window.CheckInputClass = (x, y) => {
+    var value = document.getElementById(x).hasClass(y);
+    return value;
+};
 window.GetInputCode = (x) => {
     let value = '';
     $('#' + x + ' .des-input-code').each(function () {
@@ -110,6 +117,12 @@ function CheckRegexPass() {
     let text = $("#password").val();
     let pattern = /^(.{0,7}|[^0-9]*|[^A-Z]*)$/g;
     let result = pattern.test(text);
+    return !result;
+}
+
+function PasswordRegexValidation(x) {
+    let pattern = /^(.{0,7}|[^0-9]*|[^A-Z]*)$/g;
+    let result = pattern.test(x);
     return !result;
 }
 
@@ -244,7 +257,6 @@ function Loading(x) {
 }
 
 
-
 /*click button on enter*/
 function ClickButtonOnEnter() {
     $.each($('.des-input'), function (key, value) {
@@ -286,6 +298,42 @@ function ContinueUsername() {
     }
 }
 
+function ValidatePassword(passTYpe) {
+    var password = ''
+    if (passTYpe == 1) {
+        password = GetInputCode("tab-code");
+        if (!password || password == '') {
+            return -1;
+        }
+        else if(password.length != 6) {
+            return -2;
+        } else  return 1;
+    } else {
+        password = $('#password').val();
+        if (password || password != '') {
+            return 1;
+        } else return -1;
+    }
+    
+}
+
+function ContinuePassword(customerID, username, caseControll, passType, challenge) {
+    var password = '';
+    var res = false;
+    if (passType == 1) {
+        password = GetInputCode("tab-code");
+    } else {
+        password = $('#password').val();
+    }
+    var validatedPass = ValidatePassword(passType)
+    if (validatedPass != 1) {
+        return false;
+    }
+    else {
+        res = loginPost(customerID, username, caseControll, passType, challenge)
+    }
+    return res;
+}
 function ContinuePassword() {
     let passType = $('input[name=tab]:checked', '#LoginForm').attr('id');
     let pass = $("input[name=Password]", '#LoginForm').val()
@@ -307,19 +355,90 @@ function ContinuePassword() {
 function ContinueRegister() {
     let password = $('#password').val();
     let repassword = $('#repassword').val();
+    var checkPass = PasswordRegexValidation(password)
     if (password != '' || password) {
-        if (password != repassword) {
-            DisplayError();
+        if (checkPass) {
+            if (password == repassword) {
+                HideError()
+                $('#password-sub').val(password)
+                return true;
+            }
+            else {
+                if (repassword != '' || repassword) {
+                    //$('#repassword').addClass("RepasswordFail")
+                    $('#repass-error').html(RepasswordFail)
+                    DisplayErrorSpecific("repassword");
+                } else {
+                    //$('#repassword').addClass("RepasswordEmpty")
+                    $('#repass-error').html(RepasswordEmpty)
+                    DisplayErrorSpecific("repassword");
+                }
+            }
+        } else {
+            //$('#password').addClass("PasswordRules")
+            $('#pass-error').html(PasswordRules)
+            DisplayErrorSpecific("password");
         }
-        else {
-            HideError();
-        }
+        
     } else {
-        DisplayError();
+        //$('#password').addClass("PasswordEmpty")
+        $('#pass-error').html(PasswordEmpty)
+        DisplayErrorSpecific("password");
     }
 
+    return false;
 }
+function loginPost(customerID, username, caseControll, passType, challenge) {
+    var res = '';
+    var token = $("input[name=AntiforgeryFieldname]").val();
+    var password = ''
 
+    if (passType == 1) {
+        password = GetInputCode("tab-code");
+    } else {
+        password = $('#password').val();
+    }
+    var validatedPass = ValidatePassword(passType)
+    if (validatedPass != 1) {
+        return false;
+    }
+    var params = {
+        customerID: customerID,
+        username: username,
+        password: password,
+        caseControll: caseControll,
+        passType: passType,
+        clientRequest: null,
+        challenge: challenge,
+        AntiforgeryFieldname: token
+    }
+    $.ajax({
+        url: "/sso/Auth/LoginPost",
+        type: "POST",
+        traditional: true,
+        async: false,
+        datatype: "JSON",
+        data: params,
+        success: function (data) {
+            res = data;
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            res = false
+            // When AJAX call has failed
+            //console.log('AJAX call failed.');
+            //console.log(textStatus + ': ' + errorThrown);
+            window.location = "/sso/Error";
+        },
+        complete: function () {
+            // When AJAX call is complete, will fire upon success or when error is thrown
+            //console.log('AJAX call completed');
+        }
+    });
+    return res;
+}
+function TriggerBtn(x) {
+    $('#'+x).click();
+}
 function ContinueReset() {
     if (resetPassType == "pass") {
         let password = $('#password').val();
