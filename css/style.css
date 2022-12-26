@@ -91,7 +91,7 @@ body {
     padding: 0;
     height: auto;
     width: auto;
-    min-height: 100vh;
+    min-height: 100%;
     min-height: -webkit-fill-available;
     transition-delay: 0.1s;
     -webkit-transition-delay: 0.1s;
@@ -349,7 +349,7 @@ html {
         overflow: hidden;
         align-content: space-between;
         box-sizing: border-box;
-        height: 100vh;
+        height: 100%;
         border-radius: none;
         padding: 20px 0px !important;
         box-shadow: none !important;
