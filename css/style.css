@@ -284,8 +284,9 @@ html {
 }
 
 @media (max-width: 500px) {
-    body, html {
-        height: 100%;
+    body {
+        align-items: flex-start;
+        min-height: fit-content !important;
     }
 
     .des-btn {
@@ -349,8 +350,8 @@ html {
         overflow: hidden;
         align-content: space-between;
         box-sizing: border-box;
+        height: fit-content;
         border-radius: none;
-        height: 100%;
         padding: 20px 0px !important;
         padding-bottom: 0px !important;
         box-shadow: none !important;
