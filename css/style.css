@@ -298,6 +298,7 @@ html {
 @media (max-width: 500px) {
     body {
         align-items: flex-start;
+        min-height: fit-content !important;
     }
 
     .des-btn {
