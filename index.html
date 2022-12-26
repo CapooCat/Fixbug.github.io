@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Đăng nhập</title>
+    <title>Liên kết SĐT - Email</title>
 </head>
 <link href="css/font.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
@@ -30,20 +30,30 @@
         </div>
         <div class="foot"></div>
     </section>
-    <section class="container fade-in full">
+    <section class="container fade-in">
+        <!-- <div class="des-modal-background">
+            <div class="des-modal">
+                <div class="des-modal-title"><i class="fa-solid fa-arrow-right-from-bracket"></i>Đăng xuất<a href="javascript:close()"><i class="fa-solid fa-xmark"></i></a></div>
+                <div class="des-modal-context">
+                    Bạn có muốn đăng xuất khỏi tài khoản FPT SSO này ?
+                </div>
+                <div class="des-modal-action">
+                    <a href="javascript:close()" class="modal-cancel">Huỷ</a>
+                    <a href="javascript:close()" class="modal-accept">Đồng ý</a>
+                </div>
+            </div>
+        </div> -->
+        <a href="@FromAction" class="des-back"><i class="fa-solid fa-arrow-left"></i></a>
         <div class="header">
-            <div class="top-title">
-                <img src="images\FPT_ID.svg">
-                <span>Đăng nhập 1 lần duy nhất để truy cập tất cả các ứng dụng dịch vụ của FPT TELECOM</span>
+            <div class="main-image">
+                <img src="images\LinkEmail.svg">
             </div>
+            <h1>Liên kết SĐT - Email</h1>
 
-            <div class="main-image" style="margin: 20px">
-                <img src="images\Login.svg">
-            </div>
-
-            <span class="des-input-title">USERNAME</span>
+            
+            <span class="des-input-title">BỔ SUNG SỐ ĐIỆN THOẠI ĐỂ SỬ DỤNG DỊCH VỤ</span>
             <div class="input-container">
-                <input type="text" id="username" class="des-input username" placeholder="Nhập số điện thoại/email">
+                <input type="text" id="username" class="des-input" placeholder="Nhập số điện thoại">
                 <div class="input-action">
                     <span class="input-error">!</span>
                     <span class="clear-input" onclick="clear('username')"><i class="fa-solid fa-xmark"></i></span>
@@ -51,14 +61,19 @@
             </div>
             <span class="des-error">Đã có lỗi xảy ra</span>
 
-            <div class="des-forget">
-                <a href="javascript:void(0);" id="respwd" class="des-link">Quên mật khẩu?</a>
-            </div>
+            <!-- <span class="des-input-title">BỔ SUNG SỐ EMAIL ĐỂ SỬ DỤNG DỊCH VỤ</span>
+                <div class="input-container">
+                    <input type="text" id="username" class="des-input" placeholder="Nhập email">
+                    <div class="input-action">
+                        <span class="input-error">!</span>
+                        <span class="clear-input" onclick="clear('username')"><i class="fa-solid fa-xmark"></i></span>
+                    </div>
+                </div>
+            <span class="des-error">Đã có lỗi xảy ra</span> -->
+        </div>
 
-            <a href="javascript:Redirect('Password.html')" id="next" class="des-btn">Tiếp tục</a>
-
-            <div class="des-login-title"><a href="javascript:Redirect('SignUp.html')" class="des-link">Đăng ký
-                ngay</a>
+        <div class="footer">
+            <a href="javascript:Continue();" id="next" class="des-btn">Tiếp tục</a>
         </div>
     </section>
 </body>
