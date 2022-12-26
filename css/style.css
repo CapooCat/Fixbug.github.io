@@ -1393,18 +1393,22 @@ h1 {
 }
 
 input::-webkit-input-placeholder {
+    font-weight: 500;
     font-family: 'Roboto', sans-serif;
 }
 
 input:-ms-input-placeholder {
+    font-weight: 500;
     font-family: 'Roboto', sans-serif;
 }
 
 input:-moz-placeholder {
+    font-weight: 500;
     font-family: 'Roboto', sans-serif;
 }
 
 input::placeholder {
+    font-weight: 500;
     font-family: 'Roboto', sans-serif;
 }
 
