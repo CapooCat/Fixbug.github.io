@@ -206,7 +206,6 @@ function FooterHeaderAlign() {
     }
 }
 
-
 function MarginOverflow() {
     if ($(".container").outerHeight() > $(window).height() && $(window).width() > 625) {
         $(".container").css('margin', '5vh 0px');
