@@ -216,10 +216,6 @@ function FooterHeaderAlign() {
     } else {
         $(".header").css("margin-bottom", "0");
     }
-
-    if($(".container").hasClass("full")) {
-        $("html").addClass("full");
-    }
 }
 
 function MarginOverflow() {
@@ -249,10 +245,12 @@ function Loading(x) {
     if (x == 1) {
         $(".des-btn").addClass("des-btn-block");
         $(".des-btn").removeClass("des-btn");
+        $(".loading").fadeIn(200);
     }
     else {
         $(".des-btn-block").addClass("des-btn");
         $(".des-btn-block").removeClass("des-btn-block");
+        $(".loading").fadeOut(200);
     }
 }
 
@@ -265,6 +263,8 @@ function ClickButtonOnEnter() {
                 if (e.which == 13) {
                     e.preventDefault();
                     try {
+                        let event = new Event('change');
+                        document.getElementById(value.id).dispatchEvent(event);
                         $('.des-btn')[0].click();
                     } catch { }
                 }
@@ -279,6 +279,8 @@ function ClickButtonOnEnter() {
                 if (e.which == 13) {
                     e.preventDefault();
                     try {
+                        let event = new Event('change');
+                        document.getElementById(value.id).dispatchEvent(event);
                         $('.des-btn')[0].click();
                     } catch { }
                 }
