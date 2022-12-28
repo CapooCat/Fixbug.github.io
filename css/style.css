@@ -21,6 +21,7 @@ html {
 
 .container .footer {
     flex-basis: 100%;
+    transition-delay: 0.1s;
 }
 
 .header h2 {
@@ -1174,6 +1175,8 @@ h1 {
 .err-content {
     width: 500px;
     transform: translate(-18%);
+    padding: 0px 0px 20px 0px;
+    line-height: 1.5em;
 }
 
 .tab-container a {
