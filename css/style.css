@@ -305,8 +305,7 @@ html {
 @media (max-width: 500px) {
     body {
         align-items: flex-start;
-        height: fit-content;
-        min-height: fit-content;
+        min-height: 100%;
     }
 
     .des-btn {
