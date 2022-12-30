@@ -81,7 +81,7 @@ body {
     padding: 0;
     height: auto;
     width: auto;
-    min-height: 100vh;
+    min-height: 100%;
     transition-delay: 0.1s;
     -webkit-transition-delay: 0.1s;
     -moz-transition-delay: 0.1s;
