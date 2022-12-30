@@ -221,10 +221,11 @@ function FooterHeaderAlign() {
 }
 
 function MarginOverflow() {
-    if ($(".container").outerHeight() > $(window).height() && $(window).width() > 625) {
-        $(".container").css('margin', '5vh 0px');
+    if ($(".container, .account-container").outerHeight() > $(window).height() && $(window).width() > 625) {
+        $(".container, .account-container").css('margin', '5vh 0px');
+        $("body").css('height', 'auto');
     } else {
-        $(".container").css('margin', '0');
+        $(".container, .account-container").css('margin', '0');
     }
 }
 
