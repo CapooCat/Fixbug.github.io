@@ -50,7 +50,20 @@
             </div>
         </div> -->
         <section class="account-container fade-in">
-            <a class="logout" href="javascript:void(0)"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+            <!-- <a class="logout" href="javascript:void(0)"><i class="fa-solid fa-arrow-right-from-bracket"></i></a> -->
+            <div class="dropdown logout" tabindex="0">
+                <i class="fa-solid fa-gear"></i>
+                <div class="dropdown-content">
+                    <a href="/sso/Home/LogoutUser">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        <span>Đăng xuất</span>
+                    </a>
+                    <a href="javascript:void(0)">
+                        <i class="fa-solid fa-repeat"></i>
+                        <span>Chuyển tài khoản</span>
+                    </a>
+                </div>
+            </div>
             <a href="javascript:void(0)" class="des-back"><i class="fa-solid fa-arrow-left"></i></a>
             <div class="account-image">
                 <img src="images\FPT_ID.svg">
