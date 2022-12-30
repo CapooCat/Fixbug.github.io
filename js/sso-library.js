@@ -232,8 +232,8 @@ function AutoFocusInput() {
     if ($('.des-input').length > 0)
         $('.des-input')[0].focus();
 
-    $('a').unbind('focus');
-    $('a').on('focus', function () {
+    $('.container a').unbind('focus');
+    $('.container a').on('focus', function () {
         if ($('body .des-input').length > 0)
             $('body .des-input')[0].focus();
     });

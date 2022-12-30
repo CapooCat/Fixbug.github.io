@@ -2030,7 +2030,7 @@ input::placeholder {
     position: absolute;
     display: none;
     height: fit-content;
-    top: 25px;
+    top: calc(100% + 5px);
     right: 0;
     background-color: white;
     width: 200px;
@@ -2039,6 +2039,7 @@ input::placeholder {
     overflow: hidden;
     border-radius: 8px;
     font-size: 13px;
+    z-index: 9999;
 }
 
 .dropdown-content a {
@@ -2136,6 +2137,7 @@ input::placeholder {
     height: 60px;
     width: 100%;
     background-color: white;
+    z-index: 999999;
     top: 0;
     left: 0;
 }
@@ -2166,40 +2168,47 @@ input::placeholder {
     width: 1px;
     height: 70%;
     position: absolute;
-    right: 42%;
+    right: 45%;
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.top-nav .logout a {
-    transition: .3s;
-    -webkit-transition: .3s;
-    -moz-transition: .3s;
-    color: var(--main_color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(var(--main_color_light), 0.2);
-    border-radius: 8px;
-    height: 45px;
-    width: 45px;
-    z-index: 1;
-    position: relative;
-    overflow: hidden;
-}
+    .top-nav .logout .dropdown {
+        transition: .3s;
+        -webkit-transition: .3s;
+        -moz-transition: .3s;
+        color: var(--main_color);
+        display: flex;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(var(--main_color_light), 0.2);
+        border-radius: 8px;
+        height: 45px;
+        width: 45px;
+        overflow: hidden;
+        font-size: 16px;
+    }
+        .top-nav .logout .dropdown > i {
+            transition: .3s;
+        }
 
-.light-btn-animate::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 100%;
-    background-color: rgba(var(--main_color_light), 1);
-    transform: translate(0%, 100%);
-    z-index: -1;
-    transition: .3s;
-    -webkit-transition: .3s;
-    -moz-transition: .3s;
-}
+        .top-nav .logout .dropdown:focus > i, .top-nav .logout .dropdown:hover > i {
+            transform: rotate(90deg);
+        }
+
+        .light-btn-animate::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+            background-color: rgba(var(--main_color_light), 1);
+            transform: translate(0%, 100%);
+            z-index: -1;
+            transition: .3s;
+            -webkit-transition: .3s;
+            -moz-transition: .3s;
+        }
 
 .light-btn-animate:hover::before {
     transform: translate(0%, 0%) scale(2);
@@ -2268,6 +2277,7 @@ input::placeholder {
     .account-container {
         width: 100vw;
         min-height: calc(100vh - 2px);
+        max-height: 100%;
         max-width: 100%;
         box-shadow: none;
         align-content: space-around;
