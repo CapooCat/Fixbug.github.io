@@ -79,8 +79,7 @@ body {
     position: relative;
     margin: 0;
     padding: 0;
-    height: auto;
-    width: auto;
+    height: 100%;
     min-height: 100%;
     transition-delay: 0.1s;
     -webkit-transition-delay: 0.1s;
@@ -1454,7 +1453,7 @@ input::placeholder {
 
 .account-container {
     width: 100vw;
-    height: fit-content !important;
+    height: fit-content;
     max-width: 60vw;
     min-height: 590px;
     border-radius: 24px;
@@ -1500,6 +1499,7 @@ input::placeholder {
         background: rgba(255, 255, 255, 0.3);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.5);
+        box-sizing: border-box;
     }
 }
 
@@ -2275,6 +2275,7 @@ input::placeholder {
 
     .account-container {
         width: 100vw;
+        height: 100%;
         min-height: 100%;
         max-width: 100%;
         box-shadow: none;
