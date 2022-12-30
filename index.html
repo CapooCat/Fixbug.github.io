@@ -2,92 +2,118 @@
 <html>
 
 <head>
-    <title>Đăng ký</title>
+    <title>Điều khoản chính sách</title>
 </head>
 <link href="css/font.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/all.min.css" rel="stylesheet">
-
-<script src="js/jquery-3.6.0.min.js"></script>
+<link href="css/jquery-ui.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
 <body>
-    <div class="loading">
-        <div class="circle-loading"></div>
-    </div>
     <section class="background">
-        <div class="head"></div>
-        <div>
-            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-                <defs>
-                    <path id="gentle-wave"
-                        d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-                </defs>
-                <g class="parallax">
-                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(var(--main_color_light), .7)" />
-                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(var(--main_color_light), .5)" />
-                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(var(--main_color_light), .3)" />
-                    <use xlink:href="#gentle-wave" x="48" y="7" fill="var(--main_color)" />
-                </g>
-            </svg>
-        </div>
-        <div class="foot"></div>
+            <div class="head"></div>
+            <div>
+                <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                    <defs>
+                        <path id="gentle-wave"
+                            d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                    </defs>
+                    <g class="parallax">
+                        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(var(--main_color_light), .7)" />
+                        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(var(--main_color_light), .5)" />
+                        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(var(--main_color_light), .3)" />
+                        <use xlink:href="#gentle-wave" x="48" y="7" fill="var(--main_color)" />
+                    </g>
+                </svg>
+            </div>
+            <div class="foot"></div>
     </section>
-    <section class="container fade-in">
-        <a href="javascript:GoBack();" class="des-back"><i class="fa-solid fa-arrow-left"></i></a>
-        <div class="header">
-            <div class="main-image">
-                <img src="images\SignUp.svg">
+        <!-- <div class="left-nav">
+            <div class="logo"><img src="images\FPT_ID.svg"></div>
+            <ul class="menu">
+                <li class="active"><a href="javascript:void(0)"><span>Quản lý thông tin</span><i class="fa-solid fa-user"></i></a>
+                    <ul>
+                        <li><a href="javascript:void(0)">Xem thông tin</a></li>
+                    </ul>
+                </li>
+                <li class="active"><a href="javascript:void(0)"><span>Quản lý bảo mật</span><i class="fa-solid fa-shield-halved"></i></a>
+                    <ul>
+                        <li><a href="javascript:void(0)">Reset mật khẩu</a></li>
+                        <li><a href="javascript:void(0)">Quản lý thông tin đăng nhập</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="bottom">
+                <a class="logout" href="javascript:void(0)"><span>Đăng xuất</span><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
             </div>
-    
-            <h1>Đăng ký</h1>
-            <span class="des-input-title">USERNAME</span>
-            <div class="input-container">
-                <input type="text" id="username" class="des-input username" placeholder="Nhập số điện thoại/email">
-                <div class="input-action">
-                    <span class="input-error">!</span>
-                    <span class="clear-input" onclick="clear('username')"><i class="fa-solid fa-xmark"></i></span>
-                </div>
+        </div> -->
+        <section class="account-container fade-in">
+            <a class="logout" href="javascript:void(0)"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+            <a href="javascript:void(0)" class="des-back"><i class="fa-solid fa-arrow-left"></i></a>
+            <div class="account-image">
+                <img src="images\FPT_ID.svg">
             </div>
-            <span class="des-error">Đã có lỗi xảy ra</span>
 
-            <span class="des-input-title">PASSWORD</span>
-            <div class="input-container">
-                <input type="text" id="password" class="des-input password" placeholder="Nhập mật khẩu">
-                <div class="input-action">
-                    <span class="input-error">!</span>
-                    <span class="eye-input unhide" style="display: flex;"
-                        onclick="ToggleHide('#password', 'text')"><i class="fa-solid fa-eye"></i></span>
-                    <span class="eye-input hide" onclick="ToggleHide('#password', 'password')"><i
-                            class="fa-solid fa-eye-slash"></i></span>
-                </div>
-            </div>
-            <span class="des-error">Đã có lỗi xảy ra</span>
+        <div class="account-menu">
+            <div class="action-menu">
+                <div class="box" href="javascript:void(0)">
+                    <span class="box-title">Quản lý thông tin</span>
+                    <img src="images\info.svg">
+                    <div class="menu-info">
+                        <div class="case">Họ tên</div>
+                        <span class="info">Đạt</span>
+                        <div class="input">
+                            <input name="fullname" type="text" value="Đạt" />
+                        </div>
+                        <span style="display: block;" class="des-error">Vui lòng điền họ tên đầy đủ</span>
 
-            <span class="des-input-title">REPEAT PASSWORD</span>
-            <div class="input-container">
-                <input type="text" id="repassword" class="des-input password" placeholder="Nhập lại mật khẩu">
-                <div class="input-action">
-                    <span class="input-error">!</span>
-                    <span class="eye-input unhide" style="display: flex;"
-                        onclick="ToggleHide('#repassword', 'text')"><i class="fa-solid fa-eye"></i></span>
-                    <span class="eye-input hide" onclick="ToggleHide('#repassword', 'password')"><i
-                            class="fa-solid fa-eye-slash"></i></span>
+                        <div class="case">Giới tính</div>
+                        <span class="info">Nam</span>
+                        <div class="input selection">
+                            <select>
+                                <option value="1" selected>Nam</option>
+                                <option value="2">Nữ</option>
+                            </select>
+                        </div>
+                        <span style="display: block;" class="des-error">Vui lòng điền họ tên đầy đủ</span>
+
+                        <div class="case">Ngày sinh</div>
+                        <span class="info">10/10/2022</span>
+                        <div class="date-picker input">
+                            <input name="dob" value="10/10/2022" readonly/><i class="fa-regular fa-calendar"></i>
+                        </div>
+                        <span style="display: block;" class="des-error">Vui lòng điền họ tên đầy đủ</span>
+                        
+                        <div class="case">Số điện thoại</div>
+                        <span class="info">0954338764</span>
+                        <div class="input">
+                            <input disabled name="phone" type="text" value="0954338764" />
+                        </div>
+
+                        <div class="case">Email</div>
+                        <span class="info">DatTT50@fpt.com.vn</span>
+                        <div class="input">
+                            <input disabled name="email" type="text" value="DatTT50@fpt.com.vn" />
+                        </div>
+                    </div>
                 </div>
             </div>
-            <span class="des-error">Đã có lỗi xảy ra</span>
-            <label class="checkbox">
-                Tôi đồng ý các <a href="javascript:Redirect('Term.html')">điều khoản</a> và <a href="javascript:Redirect('Term.html')">chính
-                    sách</a>
-                <input type="checkbox">
-                <span class="checkmark"></span>
-            </label>
         </div>
-        <div class="footer">
-            <a href="javascript:console.log('ok')" style="margin-top: 0px;" class="des-btn">Tiếp tục</a>
+        
+        <div class="btn-action">
+            <a href="javascript:void(0)" class="modal-cancel" name="cancel">Huỷ</a>
+            <a href="javascript:void(0)" class="modal-accept" name="save">Lưu</a>
+        </div>
+
+        <div class="btn-action active">
+            <a href="javascript:void(0)" class="modal-accept" name="update">Cập nhật</a>
         </div>
     </section>
 </body>
+<script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/sso-library.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+
 </html>

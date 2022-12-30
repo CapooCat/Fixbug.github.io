@@ -370,7 +370,7 @@ html {
         overflow: hidden;
         align-content: space-between;
         box-sizing: border-box;
-        height: 100vh;
+        height: 100%;
         height: -webkit-fill-available;
         border-radius: none;
         padding: 20px 0px !important;
@@ -539,7 +539,7 @@ a {
     width: 320px;
     border-radius: 16px;
     padding: 45px 120px;
-    min-height: 200px;
+    min-height: 320px;
     background-color: white;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     overflow: hidden;
@@ -548,7 +548,7 @@ a {
 .des-input-title {
     letter-spacing: 1px;
     color: #000000;
-    font-weight: 700;
+    font-weight: 800;
     font-size: 12px;
     display: block;
 }
@@ -565,7 +565,7 @@ a {
     border: none;
     background-color: #00000000;
     border-bottom: 1px solid var(--grey);
-    font-weight: 700;
+    font-weight: 700 !important;
     transition: 0.3s !important;
     -webkit-transition: .3s !important;
     -moz-transition: .3s !important;
@@ -656,7 +656,7 @@ h1 {
     margin: 20px 0px 20px 0px;
     color: #1E293B;
     font-size: 32px;
-    font-weight: 900;
+    font-weight: 800;
 }
 
 .des-link {
@@ -683,6 +683,22 @@ h1 {
 }
 
 .des-btn-block {
+    display: block;
+    text-align: center;
+    font-size: 15px;
+    padding: 15px 8px;
+    color: white;
+    border-radius: 8px;
+    border: 1px solid #A7A7A7;
+    font-weight: 700;
+    transition: margin 0s, background-color .3s, color .3s;
+    -webkit-transition: margin 0s, background-color .3s, color .3s;
+    -moz-transition: margin 0s, background-color .3s, color .3s;
+    pointer-events: none;
+    background-color: #A7A7A7;
+    user-select: none;
+}
+.des-btn-block-not-loading {
     display: block;
     text-align: center;
     font-size: 15px;
@@ -1166,6 +1182,8 @@ h1 {
 
 .failed span {
     line-height: 24px;
+    margin-bottom: 20px;
+    display: block;
 }
 
 .err {
@@ -1416,22 +1434,22 @@ h1 {
 }
 
 input::-webkit-input-placeholder {
-    font-weight: 500;
+    font-weight: 400;
     font-family: 'Roboto', sans-serif;
 }
 
 input:-ms-input-placeholder {
-    font-weight: 500;
+    font-weight: 400;
     font-family: 'Roboto', sans-serif;
 }
 
 input:-moz-placeholder {
-    font-weight: 500;
+    font-weight: 400;
     font-family: 'Roboto', sans-serif;
 }
 
 input::placeholder {
-    font-weight: 500;
+    font-weight: 400;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -1874,6 +1892,14 @@ input::placeholder {
 
 .menu-info input:focus {
     outline: none;
+}
+
+.menu-info .des-error {
+    flex-basis: 100%;
+    margin-left: calc(30% + 30px);
+    margin-right: 10px;
+    padding: 5px 0px;
+    text-align: left;
 }
 
 .btn-action {

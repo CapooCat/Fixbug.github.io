@@ -115,13 +115,13 @@ function CheckFireFox() {
 
 function CheckRegexPass() {
     let text = $("#password").val();
-    let pattern = /^(.{0,7}|[^0-9]*|[^A-Z]*)$/g;
+    let pattern = /^(.{0,7}|.{17,}|[^0-9]*|[^A-Z]*)$/g;
     let result = pattern.test(text);
     return !result;
 }
 
 function PasswordRegexValidation(x) {
-    let pattern = /^(.{0,7}|[^0-9]*|[^A-Z]*)$/g;
+    let pattern = /^(.{0,7}|.{17,}|[^0-9]*|[^A-Z]*)$/g;
     let result = pattern.test(x);
     return !result;
 }
@@ -193,10 +193,12 @@ function CustomDatePicker() {
             if (!$(value).hasClass("date-picker-bind")) {
                 $(value).addClass("i-" + key);
                 let x = ".i-" + key + " > input";
-                let instance = new dtsel.DTS(x, {
-                    direction: 'BOTTOM',
-                    dateFormat: "dd/mm/yyyy",
-                    showTime: false
+                $(x).datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "-100:-10",
+                    setDate: $(x).val()
                 });
                 $(value).addClass("date-picker-bind");
             }
@@ -227,16 +229,13 @@ function MarginOverflow() {
 }
 
 function AutoFocusInput() {
-    if ($('input[type=text]').length > 0)
-        $('input[type=text]')[0].focus();
-    if ($('input[type=password]').length > 0)
-        $('input[type=password]')[0].focus();
+    if ($('.des-input').length > 0)
+        $('.des-input')[0].focus();
 
+    $('a').unbind('focus');
     $('a').on('focus', function () {
-        if ($('input[type=text]').length > 0)
-            $('input[type=text]')[0].focus();
-        if ($('input[type=password]').length > 0)
-            $('input[type=password]')[0].focus();
+        if ($('body .des-input').length > 0)
+            $('body .des-input')[0].focus();
     });
 }
 
@@ -263,8 +262,6 @@ function ClickButtonOnEnter() {
                 if (e.which == 13) {
                     e.preventDefault();
                     try {
-                        let event = new Event('change');
-                        document.getElementById(value.id).dispatchEvent(event);
                         $('.des-btn')[0].click();
                     } catch { }
                 }
@@ -279,8 +276,6 @@ function ClickButtonOnEnter() {
                 if (e.which == 13) {
                     e.preventDefault();
                     try {
-                        let event = new Event('change');
-                        document.getElementById(value.id).dispatchEvent(event);
                         $('.des-btn')[0].click();
                     } catch { }
                 }
@@ -355,6 +350,7 @@ function ContinuePassword() {
 }
 
 function ContinueRegister() {
+    HideError();
     let password = $('#password').val();
     let repassword = $('#repassword').val();
     var checkPass = PasswordRegexValidation(password)
@@ -391,20 +387,20 @@ function ContinueRegister() {
     return false;
 }
 function loginPost(customerID, username, caseControll, passType, challenge) {
-    var res = '';
-    var token = $("input[name=AntiforgeryFieldname]").val();
-    var password = ''
+    let res = '';
+    let token = $("input[name=AntiforgeryFieldname]").val();
+    let password = ''
 
     if (passType == 1) {
         password = GetInputCode("tab-code");
     } else {
         password = $('#password').val();
     }
-    var validatedPass = ValidatePassword(passType)
+    let validatedPass = ValidatePassword(passType)
     if (validatedPass != 1) {
         return false;
     }
-    var params = {
+    let params = {
         customerID: customerID,
         username: username,
         password: password,
@@ -458,7 +454,7 @@ function ContinueReset() {
                 HideErrorSpecific("password");
                 if (password != repassword) {
                     let checkRePassEmpty = !repassword && repassword == '';
-                    let errStatement = checkRePassEmpty == true ? repassEmpty : repassFail;
+                    let errStatement = checkRePassEmpty ? repassEmpty : repassFail;
                     $('#repass_error_statement').html(errStatement);
                     DisplayErrorSpecific("repassword");
                     wrongCount += 1;
@@ -675,6 +671,7 @@ $(".btn-action a").on("click", function () {
         $(".menu-info .info").css("display", "none");
         $(".menu-info .input").css("display", "flex");
         $(".menu-info select").css("display", "block");
+        $(".menu-info .des-error").css("display", "none");
 
         $(".btn-action").css("display", "flex");
         $(this).parent().css("display", "none");
@@ -682,6 +679,7 @@ $(".btn-action a").on("click", function () {
         $(".menu-info .info").css("display", "block");
         $(".menu-info .input").css("display", "none");
         $(".menu-info select").css("display", "none");
+        $(".menu-info .des-error").css("display", "none");
 
         $(".btn-action").css("display", "flex");
         $(this).parent().css("display", "none");
@@ -758,7 +756,7 @@ $("body").on("keydown", ".des-input-code", function (e) {
                 });
             } else {
                 //focus input pincode đầu tiên
-                First = $('.input-container').first().children('.des-input-code')
+                let First = $('.input-container').first().children('.des-input-code')
                 total = First.length;
                 $.each(First, function (key, value) {
                     if (value.value == "" || total == key + 1) {
@@ -826,8 +824,8 @@ $("body").on("keyup", ".des-input-code", function (e) {
     try {
         if (mobile) {
 
-            if ($(this).val().match(/[^0-9]/g)) {
-                $(this).val($(this).val().replace(/[^0-9]/g, ""));
+            if ($(this).val().match(/\D/g)) {
+                $(this).val($(this).val().replace(/\D/g, ""));
                 $(this).css("border-bottom", "1px solid #CCCFD7");
             }
 
@@ -844,8 +842,8 @@ $("body").on("input", ".des-input-code", function (e) {
     try {
         if (mobile) {
 
-            if ($(this).val().match(/[^0-9]/g)) {
-                $(this).val($(this).val().replace(/[^0-9]/g, ""));
+            if ($(this).val().match(/\D/g)) {
+                $(this).val($(this).val().replace(/\D/g, ""));
             }
 
             if ($(this).val().length > 1) {
