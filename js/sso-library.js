@@ -61,12 +61,14 @@ window.HideError = () => {
     $(".input-error").css("display", "flex").hide();
     $(".des-error").css("display", "flex").hide();
 }
+
 window.FocusInputPin = () => {
     $('.des-input-code')[0].focus();
 };
 window.FocusInput = (x) => {
     $(x).focus();
 };
+
 window.PreventEnter = (x) => {
     $("#"+x+" input").each(function () {
         let input = $(this);
@@ -107,6 +109,10 @@ function CheckFireFox() {
         $(".des-input.password, .des-input-code.password").prop("type", "password");
         $(".des-input.password, .des-input-code.password").removeClass("password");
     }
+}
+
+function detectMobile() {
+    return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 }
 
 //#endregion 
@@ -187,6 +193,14 @@ function CustomSelect() {
     });
 }
 
+function MaxLength(value, max, input) {
+    $(input).on('input', function (e) {
+        if (value.length > max) {
+            $(e.target).val(value.slice(0, max));
+        }
+    });
+}
+
 function CustomDatePicker() {
     if ($('.date-picker > input').length > 0) {
         $.each($('.date-picker'), function (key, value) {
@@ -214,33 +228,40 @@ $(window).resize(function () {
 function FooterHeaderAlign() {
     if ($(window).width() < 500) {
         let footerH = $(".footer").outerHeight();
-        $(".header").css("margin-bottom", footerH);
+        $(".header").css("padding-bottom", footerH);
     } else {
-        $(".header").css("margin-bottom", "0");
+        $(".header").css("padding-bottom", "0");
     }
 }
 
+/*process responsive */
 function MarginOverflow() {
-    if ($(".container, .account-container").outerHeight() > $(window).height()) {
+    if ($(".container, .account-container").outerHeight() > $(window).height() || $(".full").outerHeight() + 20 > $(window).height() || $(".container, .account-container").find('.header').length > 0) {
         if ($(window).width() > 625) {
             $(".container, .account-container").css('margin', '5vh 0px');
         }
         $("body").css('height', 'auto');
     } else {
         $(".container, .account-container").css('margin', '0');
-        $("body").css('height', '100%');
+        if ($(".container, .container form").css("align-content") == "space-between" && navigator.userAgent.indexOf("Firefox") > -1)
+            $(".container, .container form").has(".full").css("align-content", "initial");
+        $("body").removeAttr('style');
     }
 }
 
+/*Auto focus on the first input of login layout*/
 function AutoFocusInput() {
-    if ($('.des-input').length > 0)
+    if ($('.des-input').length > 0 && !detectMobile())
         $('.des-input')[0].focus();
 
-    $('.container a').unbind('focus');
-    $('.container a').on('focus', function () {
-        if ($('body .des-input').length > 0)
-            $('body .des-input')[0].focus();
-    });
+    if ($('body .des-input').length > 0) {
+        $('.container .des-btn').unbind('click');
+        $('.container .des-btn').on('click', function () {
+            PrevFocus.focus();
+        });
+    }
+
+    $('.container a, .container button').attr("tabindex", "-1");
 }
 
 /*show hide loading icon*/
@@ -257,7 +278,6 @@ function Loading(x) {
     }
 }
 
-
 /*click button on enter*/
 function ClickButtonOnEnter() {
     $.each($('.des-input'), function (key, value) {
@@ -266,6 +286,8 @@ function ClickButtonOnEnter() {
                 if (e.which == 13) {
                     e.preventDefault();
                     try {
+                        let event = new Event('change');
+                        document.getElementById(value.id).dispatchEvent(event);
                         $('.des-btn')[0].click();
                     } catch { }
                 }
@@ -280,6 +302,8 @@ function ClickButtonOnEnter() {
                 if (e.which == 13) {
                     e.preventDefault();
                     try {
+                        let event = new Event('change');
+                        document.getElementById(value.id).dispatchEvent(event);
                         $('.des-btn')[0].click();
                     } catch { }
                 }
@@ -479,14 +503,13 @@ function ContinueReset() {
             DisplayErrorSpecific("pincode-input-pass");
         } else {
             HideError();
-            $('#error_statement').html(pinRule);
             if (passPinCode.length == 6) {
                 if (passPinCode == rePassPinCode) {
                     HideError();
                     $('#password').val(passPinCode)
                     $('#ResetPassForm').trigger('submit');
                 } else {
-                    let checkRePassEmpty = !repassword && repassword == '';
+                    let checkRePassEmpty = !rePassPinCode && rePassPinCode == '';
                     let errStatement = checkRePassEmpty == true ? repassEmpty : repassFail;
                     $('#repass_error_statement').html(errStatement);
                     DisplayErrorSpecific("pincode-input-repass");
@@ -551,13 +574,12 @@ $("body").on("click", ".clear-input", function (event) {
     }
 });
 
-window.onbeforeunload = function () {
-    $('#pass').prop('checked', true);
-    $('#password').focus();
-}
+//window.onbeforeunload = function () {
+//    $('#pass').prop('checked', true);
+//    $('#password').focus();
+//}
 
 /*change password tab on login*/
-$('#password').focus();
 function ChangeTab(x) {
     $(".input-error").fadeOut(150);
     $(".des-error").fadeOut(150);
@@ -584,7 +606,6 @@ function ChangeTab(x) {
     } else if (x == 'pass') {
         $('#password').focus();
     }
-
 }
 
 /*remember focus on input*/
