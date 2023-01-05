@@ -247,6 +247,9 @@ function MarginOverflow() {
             $(".container, .container form").has(".full").css("align-content", "initial");
         $("body").css('height', '100%');
     }
+
+    $("#test1").text($(".container, .account-container").outerHeight() + "<>");
+    $("#test2").text($(window).outerHeight());
 }
 
 /*Auto focus on the first input of login layout*/
