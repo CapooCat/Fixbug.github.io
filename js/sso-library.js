@@ -236,7 +236,7 @@ function FooterHeaderAlign() {
 
 /*process responsive */
 function MarginOverflow() {
-    if ($(".container, .account-container").outerHeight() > $(window).height() || $(".full").outerHeight() + 20 > $(window).height() || $(".container").find('.header').length > 0) {
+    if ($(".container, .account-container").outerHeight() > $(window).outerHeight() || $(".full").outerHeight() + 20 > $(window).outerHeight() || $(".container").find('.header').length > 0) {
         if ($(window).width() > 625) {
             $(".container, .account-container").css('margin', '5vh 0px');
         }
