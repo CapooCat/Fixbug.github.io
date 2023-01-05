@@ -236,7 +236,7 @@ function FooterHeaderAlign() {
 
 /*process responsive */
 function MarginOverflow() {
-    if ($(".container, .account-container").outerHeight() > $(window).height() || $(".full").outerHeight() + 20 > $(window).height() || $(".container, .account-container").find('.header').length > 0) {
+    if ($(".container, .account-container").outerHeight() > $(window).height() || $(".full").outerHeight() + 20 > $(window).height() || $(".container").find('.header').length > 0) {
         if ($(window).width() > 625) {
             $(".container, .account-container").css('margin', '5vh 0px');
         }
@@ -245,7 +245,7 @@ function MarginOverflow() {
         $(".container, .account-container").css('margin', '0');
         if ($(".container, .container form").css("align-content") == "space-between" && navigator.userAgent.indexOf("Firefox") > -1)
             $(".container, .container form").has(".full").css("align-content", "initial");
-        $("body").removeAttr('style');
+        $("body").css('height', '100%');
     }
 }
 
