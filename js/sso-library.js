@@ -47,19 +47,27 @@ window.TriggerChange = (name) => {
 window.DisplayErrorSpecific = (id) => {
     $("#" + id).parent().next('.des-error').css("display", "flex").hide().fadeIn(150);
     $("#" + id).next(".input-action").find(".input-error").css("display", "flex").hide().fadeIn(150);
+    $("#" + id).css("border-bottom", "1px solid red");
+    $("#" + id).next(".input-action").css("border-bottom", "1px solid red");
 }
 window.HideErrorSpecific = (id) => {
     $("#" + id).parent().next('.des-error').css("display", "flex").hide();
     $("#" + id).next(".input-action").find(".input-error").css("display", "flex").hide();
+    $("#" + id).removeAttr('style');
+    $("#" + id).next(".input-action").removeAttr('style');
 }
 window.DisplayError = () => {
     $(".input-error").css("display", "flex").hide().fadeIn(150);
     $(".des-error").css("display", "flex").hide().fadeIn(150);
+    $(".des-input").css("border-bottom", "1px solid red");
+    $(".input-action").css("border-bottom", "1px solid red");
 }
 
 window.HideError = () => {
     $(".input-error").css("display", "flex").hide();
     $(".des-error").css("display", "flex").hide();
+    $(".des-input").removeAttr('style');
+    $(".des-input").next(".input-action").removeAttr('style');
 }
 
 window.FocusInputPin = () => {
@@ -167,7 +175,76 @@ $(document).ready(function () {
     CustomDatePicker();
     CustomSelect();
     FooterHeaderAlign();
+    ToolTipBind();
 });
+
+function ToolTipBind() {
+    let username_tip = "<ul class='tip-rule'><b>Điều kiện:</b>" +
+        "<li>Dài 1 - 100 ký tự</li>" +
+        "</ul>"
+    let password_tip = "<ul class='tip-rule'><b>Điều kiện:</b>" +
+        "<li>Dài 8 - 16 ký tự</li>" +
+        "<li>Tối thiểu 1 ký hoa/Chứa ký tự hoa</li>" +
+        "<li>Tối thiểu 1 ký tự số/Chứa ký tự số</li>" +
+        "</ul>"
+
+    $(".username-tip").attr("title", username_tip);
+    $(".password-tip").attr("title", password_tip);
+
+    $('.tooltip').tooltip({
+        items: ".tooltip, [title]", position: {
+            my: "left center",
+            at: "right+10 top+6",
+            collision: "none"
+        }, content: function () {
+            let element = $(this);
+            if (element.is("[title]")) {
+                let html = $(this).attr("title");
+                return html;
+            }
+        }, show: {
+            effect: "fadeIn",
+            duration: 300
+        }, hide: {
+            effect: "fadeOut",
+            duration: 300
+        }
+    });
+
+    $(document).unbind("mouseup");
+    $('.tooltip').unbind("mouseover click mouseenter mouseleave");
+
+    let elem = null;
+    $('.tooltip').on({
+        "click": function (e) {
+
+            if ($(e.target).is(elem)) {
+                $(this).tooltip("close");
+                elem = null;
+            } else {
+                $(".tooltip").tooltip("close");
+                $(this).tooltip("open");
+                elem = $(e.target);
+            }
+        },
+        "mouseenter": function (e) {
+            e.stopImmediatePropagation();
+        },
+        "mouseleave": function (e) {
+            e.stopImmediatePropagation();
+        },
+    });
+
+    $(document).on("mouseup", function (e) {
+        if (!$(e.target).hasClass("tooltip") &&
+            !$(e.target).parents().hasClass("tooltip") &&
+            !$(e.target).parents().hasClass("ui-tooltip") &&
+            !$(e.target).hasClass("ui-tooltip")) {
+            $(".tooltip").tooltip("close");
+            elem = null;
+        }
+    });
+}
 
 function CustomSelect() {
     $(".selection").each(function () {
@@ -245,13 +322,10 @@ function MarginOverflow() {
         $("body").css('height', 'auto');
     } else {
         $(".container, .account-container").css('margin', '0');
-        if ($(".container, .container form").css("align-content") == "space-between" && navigator.userAgent.indexOf("Firefox") > -1)
-            $(".container, .container form").has(".full").css("align-content", "initial");
+        if ($(".container, .container > form").css("align-content") == "space-between")
+            $(".container, .container > form").has(".full").css("align-content", "initial");
         $("body").css('height', '100%');
     }
-
-    $("#test1").text($(".container, .account-container").outerHeight() + "<>");
-    $("#test2").text($(window).outerHeight());
 }
 
 /*Auto focus on the first input of login layout*/
