@@ -45,29 +45,42 @@ window.TriggerChange = (name) => {
 }
 
 window.DisplayErrorSpecific = (id) => {
-    $("#" + id).parent().next('.des-error').css("display", "flex").hide().fadeIn(150);
-    $("#" + id).next(".input-action").find(".input-error").css("display", "flex").hide().fadeIn(150);
-    $("#" + id).css("border-bottom", "1px solid red");
-    $("#" + id).next(".input-action").css("border-bottom", "1px solid red");
+    if ($("#" + id).parent().next('.des-error').css("display") === "none") {
+        $("#" + id).parent().next('.des-error').css("display", "flex").hide().fadeIn(300);
+        $("#" + id).next(".input-action").find(".input-error").css("display", "flex").hide().fadeIn(300);
+        $("#" + id).css("border-bottom", "1px solid red");
+        $("#" + id).next(".input-action").css("border-bottom", "1px solid red");
+    }
 }
 window.HideErrorSpecific = (id) => {
-    $("#" + id).parent().next('.des-error').css("display", "flex").hide();
-    $("#" + id).next(".input-action").find(".input-error").css("display", "flex").hide();
-    $("#" + id).removeAttr('style');
-    $("#" + id).next(".input-action").removeAttr('style');
+    if ($("#" + id).parent().next('.des-error').css("display") === "flex") {
+        $("#" + id).parent().next('.des-error').fadeOut(300);
+        $("#" + id).next(".input-action").find(".input-error").fadeOut(300);
+        $("#" + id).removeAttr('style');
+        $("#" + id).next(".input-action").removeAttr('style');
+    }
 }
+
+window.AssignError = (id, value) => {
+    $("#" + id).parent().next('.des-error').html(value);
+}
+
 window.DisplayError = () => {
-    $(".input-error").css("display", "flex").hide().fadeIn(150);
-    $(".des-error").css("display", "flex").hide().fadeIn(150);
-    $(".des-input").css("border-bottom", "1px solid red");
-    $(".input-action").css("border-bottom", "1px solid red");
+    if ($(".des-error").css("display") === "none") {
+        $(".input-error").css("display", "flex").hide().fadeIn(300);
+        $(".des-error").css("display", "flex").hide().fadeIn(300);
+        $(".des-input").css("border-bottom", "1px solid red");
+        $(".input-action").css("border-bottom", "1px solid red");
+    }
 }
 
 window.HideError = () => {
-    $(".input-error").css("display", "flex").hide();
-    $(".des-error").css("display", "flex").hide();
-    $(".des-input").removeAttr('style');
-    $(".des-input").next(".input-action").removeAttr('style');
+    if ($(".des-error").css("display") === "flex") {
+        $(".input-error").fadeOut(300);
+        $(".des-error").fadeOut(300);
+        $(".des-input").removeAttr('style');
+        $(".des-input").next(".input-action").removeAttr('style');
+    }
 }
 
 window.FocusInputPin = () => {
@@ -158,6 +171,16 @@ function CheckRegexUsername() {
 function StrimPhone(phone) {
     let pattern = /^(840|\+840|\+84|84)/g;
     return phone.replace(pattern, "0");
+}
+
+function CheckEmptyInput(id, err) {
+    let value = $("#" + id).val();
+    if (value == '' || !value) {
+        AssignError(id, err);
+        DisplayErrorSpecific(id);
+        return false;
+    }
+    return true;
 }
 
 //#endregion 
@@ -270,14 +293,6 @@ function CustomSelect() {
     });
 }
 
-function MaxLength(value, max, input) {
-    $(input).on('input', function (e) {
-        if (value.length > max) {
-            $(e.target).val(value.slice(0, max));
-        }
-    });
-}
-
 function CustomDatePicker() {
     if ($('.date-picker > input').length > 0) {
         $.each($('.date-picker'), function (key, value) {
@@ -313,13 +328,18 @@ function FooterHeaderAlign() {
 
 /*process responsive */
 function MarginOverflow() {
-    if ($(".container, .account-container").outerHeight() > $("html").height() || $(".full").outerHeight() + 20 > $("html").height() || $(".container").find('.header').length > 0) {
-        if ($(window).width() > 625) {
-            $(".container, .account-container").css('margin', '5vh 0px');
+    if ($(".container").outerHeight() > $("html").height() ||
+        ($(".account-container").width() > 625 && $(".account-container").height() + 130 > $("html").height()) ||
+        ($(".account-container").width() < 625 && $(".account-container").outerHeight() > $("html").height()) ||
+        $(".full").outerHeight() + 20 > $("html").height() ||
+        $(".container").find('.header').length > 0) {
+        if ($("html").width() > 625) {
+            $(".container").css('margin', '5vh 0px');
+            $(".account-container").css('margin', 'calc(5vh + 60px) 0px 5vh 0px');
         } else {
             $(".container, .account-container").css('margin', '0');
         }
-        $("body").css('height', 'auto');
+        $("body").css('height', '100%');
     } else {
         $(".container, .account-container").css('margin', '0');
         if ($(".container, .container > form").css("align-content") == "space-between")
@@ -336,7 +356,8 @@ function AutoFocusInput() {
     if ($('body .des-input').length > 0) {
         $('.container .des-btn').unbind('click');
         $('.container .des-btn').on('click', function () {
-            PrevFocus.focus();
+            if (PrevFocus)
+                PrevFocus.focus();
         });
     }
 
@@ -390,16 +411,6 @@ function ClickButtonOnEnter() {
             $(value).addClass("enter-bind");
         }
     });
-}
-
-function ContinueUsername() {
-    let user = $('#username').val();
-    if (user == "") {
-        DisplayError();
-    }
-    else {
-        HideError();
-    }
 }
 
 function ValidatePassword(passTYpe) {
@@ -456,42 +467,71 @@ function ContinuePassword() {
     }
 }
 
+
+
 function ContinueRegister() {
-    HideError();
     let password = $('#password').val();
     let repassword = $('#repassword').val();
-    var checkPass = PasswordRegexValidation(password)
-    if (password != '' || password) {
-        if (checkPass) {
-            if (password == repassword) {
-                HideError()
-                $('#password-sub').val(password)
-                return true;
-            }
-            else {
-                if (repassword != '' || repassword) {
-                    //$('#repassword').addClass("RepasswordFail")
-                    $('#repass-error').html(RepasswordFail)
-                    DisplayErrorSpecific("repassword");
-                } else {
-                    //$('#repassword').addClass("RepasswordEmpty")
-                    $('#repass-error').html(RepasswordEmpty)
-                    DisplayErrorSpecific("repassword");
-                }
-            }
-        } else {
-            //$('#password').addClass("PasswordRules")
-            $('#pass-error').html(PasswordRules)
-            DisplayErrorSpecific("password");
-        }
-        
-    } else {
-        //$('#password').addClass("PasswordEmpty")
-        $('#pass-error').html(PasswordEmpty)
+    let checkPass = PasswordRegexValidation(password);
+    let result = true;
+
+    if (!CheckEmptyInput("password", PasswordEmpty)) { //( input id, err value) 
+        result = false;
+    }
+    else if (!checkPass) {
+        AssignError("password", PasswordRules);
         DisplayErrorSpecific("password");
+        result = false;
+    } else {
+        HideErrorSpecific("password");
     }
 
-    return false;
+    if (!CheckEmptyInput("repassword", RepasswordEmpty)) { //( input id, err value) 
+        result = false;
+    } else if (password != repassword) {
+        AssignError("repassword", RepasswordFail);
+        DisplayErrorSpecific("repassword");
+        result = false;
+    } else {
+        HideErrorSpecific("repassword");
+    }
+
+    if (result) {
+        HideError()
+        $('#password-sub').val(password);
+    }
+
+    return result;
+
+    //if (password != '' || password) {
+    //    if (checkPass) {
+    //        if (password == repassword) {
+    //            HideError()
+    //            $('#password-sub').val(password)
+    //            return true;
+    //        }
+    //        else {
+    //            if (repassword != '' || repassword) {
+    //                //$('#repassword').addClass("RepasswordFail")
+    //                $('#repass-error').html(RepasswordFail)
+    //                DisplayErrorSpecific("repassword");
+    //            } else {
+    //                //$('#repassword').addClass("RepasswordEmpty")
+    //                $('#repass-error').html(RepasswordEmpty)
+    //                DisplayErrorSpecific("repassword");
+    //            }
+    //        }
+    //    } else {
+    //        //$('#password').addClass("PasswordRules")
+    //        $('#pass-error').html(PasswordRules)
+    //        DisplayErrorSpecific("password");
+    //    }
+    //} else {
+    //    //$('#password').addClass("PasswordEmpty")
+    //    $('#pass-error').html(PasswordEmpty)
+    //    DisplayErrorSpecific("password");
+    //}
+    //return false;
 }
 function loginPost(customerID, username, caseControll, passType, challenge) {
     let res = '';
@@ -652,11 +692,6 @@ $("body").on("click", ".clear-input", function (event) {
         PrevFocus.focus();
     }
 });
-
-//window.onbeforeunload = function () {
-//    $('#pass').prop('checked', true);
-//    $('#password').focus();
-//}
 
 /*change password tab on login*/
 function ChangeTab(x) {
