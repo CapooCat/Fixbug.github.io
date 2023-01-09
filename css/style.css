@@ -2723,14 +2723,6 @@ input::placeholder {
     color: white !important;
 }
 
-
-@media (min-width: 625px) {
-    .account-container {
-        margin-top: 100px;
-        margin-bottom: 100px;
-    }
-}
-
 @media (max-width: 1500px) {
     .device-container {
         -ms-flex-preferred-size: calc((98% / 2));

@@ -327,26 +327,26 @@ function FooterHeaderAlign() {
 }
 
 /*process responsive */
-function MarginOverflow() {
-    if ($(".container").outerHeight() > $("html").height() ||
-        ($(".account-container").width() > 625 && $(".account-container").height() + 130 > $("html").height()) ||
-        ($(".account-container").width() < 625 && $(".account-container").outerHeight() > $("html").height()) ||
-        $(".full").outerHeight() + 20 > $("html").height() ||
-        $(".container").find('.header').length > 0) {
-        if ($("html").width() > 625) {
-            $(".container").css('margin', '5vh 0px');
-            $(".account-container").css('margin', 'calc(5vh + 60px) 0px 5vh 0px');
-        } else {
-            $(".container, .account-container").css('margin', '0');
-        }
-        $("body").css('height', '100%');
-    } else {
-        $(".container, .account-container").css('margin', '0');
-        if ($(".container, .container > form").css("align-content") == "space-between")
-            $(".container, .container > form").has(".full").css("align-content", "initial");
-        $("body").css('height', '100%');
-    }
-}
+// function MarginOverflow() {
+//     if ($(".container").outerHeight() > $("html").height() ||
+//         ($(".account-container").width() > 625 && $(".account-container").height() + 130 > $("html").height()) ||
+//         ($(".account-container").width() < 625 && $(".account-container").outerHeight() > $("html").height()) ||
+//         $(".full").outerHeight() + 20 > $("html").height() ||
+//         $(".container").find('.header').length > 0) {
+//         if ($("html").width() > 625) {
+//             $(".container").css('margin', '5vh 0px');
+//             $(".account-container").css('margin', 'calc(5vh + 60px) 0px 5vh 0px');
+//         } else {
+//             $(".container, .account-container").css('margin', '0');
+//         }
+//         $("body").css('height', 'auto');
+//     } else {
+//         $(".container, .account-container").css('margin', '0');
+//         if ($(".container, .container > form").css("align-content") == "space-between")
+//             $(".container, .container > form").has(".full").css("align-content", "initial");
+//         $("body").css('height', '100%');
+//     }
+// }
 
 /*Auto focus on the first input of login layout*/
 function AutoFocusInput() {
