@@ -45,17 +45,17 @@ window.TriggerChange = (name) => {
 }
 
 window.DisplayErrorSpecific = (id) => {
-    if ($("#" + id).parent().next('.des-error').css("display") === "none") {
+    if ($("#" + id).parent().next('.des-error').is(":hidden")) {
         $("#" + id).parent().next('.des-error').css("display", "flex").hide().fadeIn(300);
         $("#" + id).next(".input-action").find(".input-error").css("display", "flex").hide().fadeIn(300);
-        $("#" + id).css("border-bottom", "1px solid red");
+        $("#" + id + ".des-input").css("border-bottom", "1px solid red");
         $("#" + id).next(".input-action").css("border-bottom", "1px solid red");
     }
 }
 window.HideErrorSpecific = (id) => {
-    if ($("#" + id).parent().next('.des-error').css("display") === "flex") {
-        $("#" + id).parent().next('.des-error').fadeOut(300);
-        $("#" + id).next(".input-action").find(".input-error").fadeOut(300);
+    if ($("#" + id).parent().next('.des-error').is(":visible")) {
+        $("#" + id).parent().next('.des-error').css("display", "flex").hide();
+        $("#" + id).next(".input-action").find(".input-error").hide();
         $("#" + id).removeAttr('style');
         $("#" + id).next(".input-action").removeAttr('style');
     }
@@ -66,18 +66,18 @@ window.AssignError = (id, value) => {
 }
 
 window.DisplayError = () => {
-    if ($(".des-error").css("display") === "none") {
+    if ($(".des-error").is(":hidden")) {
         $(".input-error").css("display", "flex").hide().fadeIn(300);
-        $(".des-error").css("display", "flex").hide().fadeIn(300);
+        $(".des-error").fadeIn(300);
         $(".des-input").css("border-bottom", "1px solid red");
         $(".input-action").css("border-bottom", "1px solid red");
     }
 }
 
 window.HideError = () => {
-    if ($(".des-error").css("display") === "flex") {
-        $(".input-error").fadeOut(300);
-        $(".des-error").fadeOut(300);
+    if ($(".des-error").is(":visible")) {
+        $(".input-error").hide();
+        $(".des-error").hide();
         $(".des-input").removeAttr('style');
         $(".des-input").next(".input-action").removeAttr('style');
     }
@@ -102,6 +102,8 @@ window.PreventEnter = (x) => {
         })
     })
 };
+
+var kusingUT = '';
 
 function Log(e) {
     console.log(e)
@@ -200,29 +202,46 @@ $(document).ready(function () {
     FooterHeaderAlign();
     ToolTipBind();
 });
-
 function ToolTipBind() {
-    let username_tip = "<ul class='tip-rule'><b>Điều kiện:</b>" +
-        "<li>Dài 1 - 100 ký tự</li>" +
+    let username_tip = "<ul class='tip-rule'>" +
+        "<li>Dài 6-100 ký tự.</li>" +
+        "<li>Chứa ký tự @.</li>" +
         "</ul>"
-    let password_tip = "<ul class='tip-rule'><b>Điều kiện:</b>" +
+    let username_tip_Phone = "<ul class='tip-rule'>" +
+        "<li>Dài 10 ký tự số.</li>" +
+        "<li>Bắt đầu bằng ký tự số \"0\".</li>" +
+        "</ul>"
+    let username_tip_TypeAll = "<ul class='tip-rule'>" +
+        "<b>1. SĐT:</b>"+
+        "<li>Dài 10 ký tự số.</li>" +
+        "<li>Bắt đầu bằng ký tự số \"0\".</li>" +
+        "<b>2. Email:</b>" +
+        "<li>Dài 6-100 ký tự.</li>" +
+        "<li>Chứa ký tự @.</li>" +
+        "</ul>"
+    let password_tip = "<ul class='tip-rule'>" +
         "<li>Dài 8 - 16 ký tự</li>" +
-        "<li>Tối thiểu 1 ký hoa/Chứa ký tự hoa</li>" +
-        "<li>Tối thiểu 1 ký tự số/Chứa ký tự số</li>" +
+        "<li>Tối thiểu 1 ký hoa</li>" +
+        "<li>Tối thiểu 1 ký tự số</li>" +
         "</ul>"
 
-    $(".username-tip").attr("title", username_tip);
-    $(".password-tip").attr("title", password_tip);
+    if (kusingUT == 1) {
+        $(".username-tip").attr("tip", username_tip_Phone);
+    } else if (kusingUT == 2) {
+        $(".username-tip").attr("tip", username_tip);
+    }
+    else { $(".username-tip").attr("tip", username_tip_TypeAll); }
+    $(".password-tip").attr("tip", password_tip);
 
     $('.tooltip').tooltip({
-        items: ".tooltip, [title]", position: {
+        items: ".tooltip, [tip]", position: {
             my: "left center",
             at: "right+10 top+6",
             collision: "none"
         }, content: function () {
             let element = $(this);
-            if (element.is("[title]")) {
-                let html = $(this).attr("title");
+            if (element.is("[tip]")) {
+                let html = $(this).attr("tip");
                 return html;
             }
         }, show: {
@@ -269,6 +288,9 @@ function ToolTipBind() {
     });
 }
 
+function UpdateUserType(value) {
+    kusingUT = value;
+}
 function CustomSelect() {
     $(".selection").each(function () {
         let Select = $(this);
@@ -339,12 +361,17 @@ function MarginOverflow() {
         } else {
             $(".container, .account-container").css('margin', '0');
         }
-        // $("body").css('height', 'auto');
+
+        if (/iPad/i.test(navigator.userAgent)) {
+            $("body").css('height', '100%');
+        } else {
+            $("body").css('height', 'auto');
+        }
     } else {
         $(".container, .account-container").css('margin', '0');
         if ($(".container, .container > form").css("align-content") == "space-between")
             $(".container, .container > form").has(".full").css("align-content", "initial");
-        // $("body").css('height', '100%');
+        $("body").css('height', '100%');
     }
 }
 
@@ -475,23 +502,31 @@ function ContinueRegister() {
     let checkPass = PasswordRegexValidation(password);
     let result = true;
 
-    if (!CheckEmptyInput("password", PasswordEmpty)) { //( input id, err value) 
-        result = false;
-    }
-    else if (!checkPass) {
-        AssignError("password", PasswordRules);
-        DisplayErrorSpecific("password");
-        result = false;
+    if (result) {
+        if (!CheckEmptyInput("password", PasswordEmpty)) { //( input id, err value) 
+            result = false;
+        }
+        else if (!checkPass) {
+            AssignError("password", PasswordRules);
+            DisplayErrorSpecific("password");
+            result = false;
+        } else {
+            HideErrorSpecific("password");
+        }
     } else {
         HideErrorSpecific("password");
     }
 
-    if (!CheckEmptyInput("repassword", RepasswordEmpty)) { //( input id, err value) 
-        result = false;
-    } else if (password != repassword) {
-        AssignError("repassword", RepasswordFail);
-        DisplayErrorSpecific("repassword");
-        result = false;
+    if (result) {
+        if (!CheckEmptyInput("repassword", RepasswordEmpty)) { //( input id, err value) 
+            result = false;
+        } else if (password != repassword) {
+            AssignError("repassword", RepasswordFail);
+            DisplayErrorSpecific("repassword");
+            result = false;
+        } else {
+            HideErrorSpecific("repassword");
+        }
     } else {
         HideErrorSpecific("repassword");
     }
@@ -647,8 +682,8 @@ function DisplayError() {
     $(".des-error").css("display", "flex").hide().fadeIn(150);
 }
 function HideError() {
-    $(".input-error").css("display", "flex").hide();
-    $(".des-error").css("display", "flex").hide();
+    $(".input-error").hide();
+    $(".des-error").hide();
 }
 
 /*check if text input have value on load then show the clear icon*/
