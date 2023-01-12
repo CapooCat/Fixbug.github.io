@@ -458,7 +458,7 @@ function FooterHeaderAlign() {
 
 /*process responsive */
 function MarginOverflow() {
-    $("#test1").html($("html").height() + " " + $(window).height() + " " + $("body").height() + " " + $(".account-container").height() + " " + detectMobile)
+    $("#test1").html($("html").height() + " " + $(window).height() + " " + $("body").height() + " " + $(".account-container").height() + " " + detectMobile())
     if ($(".container").outerHeight() > $("html").height() ||
         ($(".account-container").width() > 625 && $(".account-container").height() > $("html").height()) ||
         ($(".account-container").width() < 625 && $(".account-container").outerHeight() > $("html").height()) ||
@@ -480,7 +480,7 @@ function MarginOverflow() {
         if ($(".container, .container > form").css("align-content") == "space-between")
             $(".container, .container > form").has(".full").css("align-content", "initial");
 
-        if (detectMobile && $(".account-container").width() > 625) {
+        if (detectMobile() && $(".account-container").width() > 625) {
             $("body").css('height', '100vh');
         } else {
             $("body").css('height', '100%');
