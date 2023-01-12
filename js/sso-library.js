@@ -458,7 +458,7 @@ function FooterHeaderAlign() {
 
 /*process responsive */
 function MarginOverflow() {
-    $("#test1").html($("html").height() + " " + $(window).height() + " " + $("body").height() + " " + $(".account-container").height())
+    $("#test1").html($("html").height() + " " + $(window).height() + " " + $("body").height() + " " + $(".account-container").height() + " " + /iPad/i.test(navigator.userAgent))
     if ($(".container").outerHeight() > $("html").height() ||
         ($(".account-container").width() > 625 && $(".account-container").height() + 130 > $("html").height()) ||
         ($(".account-container").width() < 625 && $(".account-container").outerHeight() > $("html").height()) ||
