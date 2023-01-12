@@ -460,7 +460,6 @@ function FooterHeaderAlign() {
 function MarginOverflow() {
     $("#test1").html($("html").height() + " " + $(window).height() + " " + $("body").height() + " " + $(".account-container").height() + " " + /iPad/i.test(navigator.userAgent))
     if ($(".container").outerHeight() > $("html").height() ||
-        ($(".account-container").width() > 625 && $(".account-container").height() + 130 > $("html").height()) ||
         ($(".account-container").width() < 625 && $(".account-container").outerHeight() > $("html").height()) ||
         $(".full").outerHeight() + 20 > $("html").height() ||
         $(".container").find('.header').length > 0) {
@@ -476,9 +475,10 @@ function MarginOverflow() {
         } else {
             $("body").css('height', 'auto');
         }
-        $("#test2").html("");
+        $("#test2").html($("body").attr("style"));
     } else {
-        $("#test2").html("trigger");
+        console.log($("body").attr("style"));
+        $("#test2").html($("body").attr("style"));
         $(".container, .account-container").css('margin', '0');
         if ($(".container, .container > form").css("align-content") == "space-between")
             $(".container, .container > form").has(".full").css("align-content", "initial");
