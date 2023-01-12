@@ -477,6 +477,7 @@ function MarginOverflow() {
             $("body").css('height', 'auto');
         }
     } else {
+        $("#test1").html("trigger");
         $(".container, .account-container").css('margin', '0');
         if ($(".container, .container > form").css("align-content") == "space-between")
             $(".container, .container > form").has(".full").css("align-content", "initial");
