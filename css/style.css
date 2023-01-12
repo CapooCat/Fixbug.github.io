@@ -1868,6 +1868,10 @@ input::placeholder {
     font-size: 15px !important;
 }
 
+.menu-info .tooltip {
+    display: none;
+}
+
     .menu-info .case {
         font-weight: bold;
         display: -webkit-flex;
@@ -1917,13 +1921,19 @@ input::placeholder {
     text-align: left;
 }
 
-.btn-action {
-    flex-basis: 95%;
-    justify-content: flex-end;
-    margin: 20px auto 20px auto;
-    gap: 10px;
-    display: none;
-}
+    .menu-info .des-error::before {
+        content: '\f06a';
+        font-family: FontAwesome;
+        margin-right: 5px;
+    }
+
+    .btn-action {
+        flex-basis: 95%;
+        justify-content: flex-end;
+        margin: 20px auto 20px auto;
+        gap: 10px;
+        display: none;
+    }
 
     .btn-action.active {
         display: -webkit-flex;

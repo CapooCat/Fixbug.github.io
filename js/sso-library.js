@@ -202,27 +202,134 @@ $(document).ready(function () {
     FooterHeaderAlign();
     ToolTipBind();
 });
+
+function PasteAt(str, substring, index, to) {
+    if (index === to)
+        return str.slice(0, index) + substring + str.slice(index);
+    else {
+        return str.replace(str.slice(index, to), substring);
+    }
+}
+
+//set input rule to prevent unwanted letter from typing in
+//elem: element class or id
+//block: block letter type options (number, alphabet, special, whitespace)
+//example: SetRuleInput("#id", "number, alphabet", 100) will block number and alphabet from typing in
+//Note: you can also set a custom regex
+//example: SetRuleInput("#id",/^\d/g, 100)
+function SetRuleInput(elem, block, maxlength = 0) {
+    let oldValue = [];
+    let is_custom_regex = true;
+
+    let regex = ('[^A-Za-z' //allow A-Za-z
+        + '\\u0080-\\uFFFF' //allow unicode
+        + '\\d' //allow digit
+        + '\\s' //allow space
+        + '\\!\\@\\#\\$\\%\\^\\&\\*\\)\\(\\+\\=\\.\\<\\>\\{\\}\\[\\]\\:\\;\\\'\\"\\|\\~\\`\\_\\-\\?\\/\\,\\\\]') //allow special character
+
+    if (block.includes("b-number")) {
+        regex = regex.replace('\\d', '');
+        is_custom_regex = false;
+    }
+    if (block.includes("b-alphabet")) {
+        regex = regex.replace('A-Za-z\\u0080-\\uFFFF', '');
+        is_custom_regex = false;
+    }
+    if (block.includes("b-special")) {
+        regex = regex.replace('\\!\\@\\#\\$\\%\\^\\&\\*\\)\\(\\+\\=\\.\\<\\>\\{\\}\\[\\]\\:\\;\\\'\\"\\|\\~\\`\\_\\-\\?\\/\\,\\\\', '');
+        is_custom_regex = false;
+    }
+    if (block.includes("b-whitespace")) {
+        regex = regex.replace('\\s', '');
+        is_custom_regex = false;
+    }
+    if (!is_custom_regex)
+        regex = new RegExp(regex);
+    else
+        regex = block;
+
+    /*regex prevent input listener*/
+    $(elem).on("input", function () {
+        let value = $(this).val();
+        let caret = [this.selectionStart - 1, this.selectionEnd - 1]
+
+        if (value.length > maxlength && maxlength > 0) {
+            $(this).val(value.substring(0, maxlength));
+        }
+
+        if (regex.test(value)) {
+            value = value.replace(regex, '');
+            $(this).val(value);
+            $(this).prop('selectionStart', caret[0]); //set index to the same position after replaced value
+            $(this).prop('selectionEnd', caret[1]); //set index to the same position after replaced value
+        }
+    });
+
+    /*listen for paste and save history for undo*/
+    $(elem).on('paste', function (e) {
+        e.preventDefault();
+        let value = $(this).val();
+        let caret = [this.selectionStart, this.selectionEnd];
+        let Clipboard = e.originalEvent.clipboardData.getData('text').replace(regex, "");
+        if (!oldValue.includes(value))
+            oldValue.push(value);
+
+        value = PasteAt(value, Clipboard, caret[0], caret[1]);
+
+        if (value.length > maxlength && maxlength > 0) {
+            $(this).val(value.substring(0, maxlength));
+        } else {
+            $(this).val(value);
+        }
+
+        $(this).prop('selectionStart', caret[0] + Clipboard.length);
+        $(this).prop('selectionEnd', caret[0] + Clipboard.length);
+    });
+
+    /*undo change listener*/
+    $(elem).on('keydown', function (e) {
+        if (event.ctrlKey && event.key === 'z' && oldValue != null) {
+            if (oldValue.length > 0) {
+                $(this).val(oldValue.pop());
+                if ($(this).val().length > maxlength && maxlength > 0) {
+                    $(this).val(value.substring(0, maxlength));
+                }
+            }
+        }
+    });
+
+    /*remove undo value on out of focus*/
+    $(elem).on('blur', function (e) {
+        oldValue = [];
+    });
+}
+
 function ToolTipBind() {
     let username_tip = "<ul class='tip-rule'>" +
-        "<li>Dài 6-100 ký tự.</li>" +
+        "<li>Độ dài 6-100 ký tự.</li>" +
         "<li>Chứa ký tự @.</li>" +
         "</ul>"
     let username_tip_Phone = "<ul class='tip-rule'>" +
-        "<li>Dài 10 ký tự số.</li>" +
+        "<li>Độ dài 10 ký tự số.</li>" +
         "<li>Bắt đầu bằng ký tự số \"0\".</li>" +
         "</ul>"
     let username_tip_TypeAll = "<ul class='tip-rule'>" +
         "<b>1. SĐT:</b>"+
-        "<li>Dài 10 ký tự số.</li>" +
+        "<li>Độ dài 10 ký tự số.</li>" +
         "<li>Bắt đầu bằng ký tự số \"0\".</li>" +
         "<b>2. Email:</b>" +
-        "<li>Dài 6-100 ký tự.</li>" +
+        "<li>Độ dài 6-100 ký tự.</li>" +
         "<li>Chứa ký tự @.</li>" +
         "</ul>"
     let password_tip = "<ul class='tip-rule'>" +
-        "<li>Dài 8 - 16 ký tự</li>" +
-        "<li>Tối thiểu 1 ký hoa</li>" +
+        "<li>Độ dài 8 - 16 ký tự</li>" +
+        "<li>Tối thiểu 1 ký tự Hoa</li>" +
         "<li>Tối thiểu 1 ký tự số</li>" +
+        "</ul>"
+    let fullname_tip = "<ul class='tip-rule'>" +
+        "<li>Độ dài 1 - 100 ký tự</li>" +
+        "<li>Không chứa ký tự số</li>" +
+        "<li>Không chứa ký tự đặc biệt</li>" +
         "</ul>"
 
     if (kusingUT == 1) {
@@ -232,6 +339,7 @@ function ToolTipBind() {
     }
     else { $(".username-tip").attr("tip", username_tip_TypeAll); }
     $(".password-tip").attr("tip", password_tip);
+    $(".fullname-tip").attr("tip", fullname_tip);
 
     $('.tooltip').tooltip({
         items: ".tooltip, [tip]", position: {
@@ -394,8 +502,10 @@ function AutoFocusInput() {
 /*show hide loading icon*/
 function Loading(x) {
     if (x == 1) {
-        $(".des-btn").addClass("des-btn-block");
-        $(".des-btn").removeClass("des-btn");
+        if (!$(".des-btn").hasClass("flexible")) {
+            $(".des-btn").addClass("des-btn-block");
+            $(".des-btn").removeClass("des-btn");
+        }
         $(".loading").fadeIn(200);
     }
     else {
@@ -626,12 +736,14 @@ function ContinueReset() {
         if (password == "" || !password) {
             $('#error_statement').html(passEmpty);
             DisplayErrorSpecific("password");
+            Loading(0);
         }
         else {
             HideError();
             $('#error_statement').html(passRule);
             if (!CheckRegexPass()) {
                 DisplayErrorSpecific("password");
+                Loading(0);
             } else {
                 HideErrorSpecific("password");
                 if (password != repassword) {
@@ -639,6 +751,7 @@ function ContinueReset() {
                     let errStatement = checkRePassEmpty ? repassEmpty : repassFail;
                     $('#repass_error_statement').html(errStatement);
                     DisplayErrorSpecific("repassword");
+                    Loading(0);
                     wrongCount += 1;
                 }
                 else {
@@ -846,6 +959,7 @@ $(".btn-action a").on("click", function () {
         $(".menu-info .input").css("display", "flex");
         $(".menu-info select").css("display", "block");
         $(".menu-info .des-error").css("display", "none");
+        $(".menu-info .tooltip").css("display", "block");
 
         $(".btn-action").css("display", "flex");
         $(this).parent().css("display", "none");
@@ -854,6 +968,7 @@ $(".btn-action a").on("click", function () {
         $(".menu-info .input").css("display", "none");
         $(".menu-info select").css("display", "none");
         $(".menu-info .des-error").css("display", "none");
+        $(".menu-info .tooltip").css("display", "none");
 
         $(".btn-action").css("display", "flex");
         $(this).parent().css("display", "none");
@@ -1055,48 +1170,12 @@ $("body").on("paste", ".des-input-code", function (e) {
 
 //#region redirect animation function
 async function Redirect(url) {
-    sessionStorage.setItem("animation", "slide-in-right");
-
-    if ($(".intro-container").length > 0) {
-        await $("body").on("transitionend otransitionend webkitTransitionEnd", ".intro-container", function () {
-            window.location.href = url;
-            $(".intro-container").unbind("transitionend otransitionend webkitTransitionEnd");
-        });
-
-        $(".intro-container").removeClass("slide-in-right");
-        $(".intro-container").addClass("slide-out-left");
-
-
-    } else {
-        await $("body").on("transitionend otransitionend webkitTransitionEnd", ".container", function () {
-            window.location.href = url;
-            $(".container").unbind("transitionend otransitionend webkitTransitionEnd");
-        });
-
-        $(".container").removeClass("slide-in-right");
-        $(".container").addClass("slide-out-left");
-    }
+    Loading(1);
+    window.location.href = url;
 }
 
 async function GoBack() {
-    sessionStorage.setItem("animation", "slide-in-left");
-
-    if ($(".intro-container").length > 0) {
-        await $("body").on("transitionend otransitionend webkitTransitionEnd", ".intro-container", function () {
-            window.history.go(-1)
-            $(".intro-container").unbind("transitionend otransitionend webkitTransitionEnd");
-        });
-
-        $(".intro-container").removeClass("slide-in-right");
-        $(".intro-container").addClass("slide-out-right");
-    } else {
-        await $("body").on("transitionend otransitionend webkitTransitionEnd", ".container", function () {
-            window.history.go(-1);
-            $(".container").unbind("transitionend otransitionend webkitTransitionEnd");
-        });
-
-        $(".container").removeClass("slide-in-right");
-        $(".container").addClass("slide-out-right");
-    }
+    Loading(1);
+    window.history.go(-1);
 }
 //#endregion 
