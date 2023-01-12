@@ -201,7 +201,6 @@ $(document).ready(function () {
     CustomSelect();
     FooterHeaderAlign();
     ToolTipBind();
-    windowHeight();
 });
 
 function PasteAt(str, substring, index, to) {
@@ -446,7 +445,6 @@ function CustomDatePicker() {
 $(window).resize(function () {
     MarginOverflow();
     FooterHeaderAlign();
-    windowHeight();
 });
 
 function FooterHeaderAlign() {
@@ -456,11 +454,6 @@ function FooterHeaderAlign() {
     } else {
         $(".header").css("padding-bottom", "0");
     }
-}
-
-const windowHeight = () => {
-    const doc = document.documentElement
-    doc.style.setProperty('--window-height', `${window.innerHeight}px`)
 }
 
 
@@ -487,7 +480,7 @@ function MarginOverflow() {
             $(".container, .container > form").has(".full").css("align-content", "initial");
 
         if ((navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 0) || navigator.platform === 'iPad') {
-            $("body").css('height', '--window-height');
+            $("body").css('height', $("html").height());
         } else {
             $("body").css('height', '100%');
         } 
