@@ -479,7 +479,7 @@ function MarginOverflow() {
             $(".container, .container > form").has(".full").css("align-content", "initial");
 
         if ((navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 0) || navigator.platform === 'iPad') {
-            $("body").css('height', '100vh');
+            $("body").css('height', '99vh');
         } else {
             $("body").css('height', '100%');
         } 
