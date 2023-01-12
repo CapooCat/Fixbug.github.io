@@ -458,6 +458,7 @@ function FooterHeaderAlign() {
 
 /*process responsive */
 function MarginOverflow() {
+    $("#test1").html($("html").height() + " " + $(window).height() + " " + $("body").height())
     if ($(".container").outerHeight() > $("html").height() ||
         ($(".account-container").width() > 625 && $(".account-container").height() + 130 > $("html").height()) ||
         ($(".account-container").width() < 625 && $(".account-container").outerHeight() > $("html").height()) ||
@@ -469,7 +470,7 @@ function MarginOverflow() {
         } else {
             $(".container, .account-container").css('margin', '0');
         }
-
+        
         if (/iPad/i.test(navigator.userAgent)) {
             $("body").css('height', '100%');
         } else {
