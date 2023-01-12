@@ -470,12 +470,8 @@ function MarginOverflow() {
         } else {
             $(".container, .account-container").css('margin', '0');
         }
-        
-        if (/iPad/i.test(navigator.userAgent)) {
-            $("body").css('height', '100%');
-        } else {
-            $("body").css('height', 'auto');
-        }
+
+        $("body").css('height', 'auto');
         $("#test2").html($("body").attr("style"));
     } else {
         console.log($("body").attr("style"));
@@ -483,7 +479,12 @@ function MarginOverflow() {
         $(".container, .account-container").css('margin', '0');
         if ($(".container, .container > form").css("align-content") == "space-between")
             $(".container, .container > form").has(".full").css("align-content", "initial");
-        $("body").css('height', '100%');
+
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            $("body").css('height', '100vh');
+        } else {
+            $("body").css('height', '100%');
+        } 
     }
 }
 
