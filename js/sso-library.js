@@ -476,6 +476,7 @@ function MarginOverflow() {
         } else {
             $("body").css('height', 'auto');
         }
+        $("#test2").html("");
     } else {
         $("#test2").html("trigger");
         $(".container, .account-container").css('margin', '0');
