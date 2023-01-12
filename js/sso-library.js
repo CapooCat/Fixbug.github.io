@@ -474,17 +474,16 @@ function MarginOverflow() {
         $("body").css('height', 'auto');
         $("#test2").html($("body").attr("style"));
     } else {
-        console.log($("body").attr("style"));
-        $("#test2").html($("body").attr("style"));
         $(".container, .account-container").css('margin', '0');
         if ($(".container, .container > form").css("align-content") == "space-between")
             $(".container, .container > form").has(".full").css("align-content", "initial");
 
-        if (detectMobile() && $(".account-container").width() > 625) {
+        if ((navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 0) || navigator.platform === 'iPad') {
             $("body").css('height', '100vh');
         } else {
             $("body").css('height', '100%');
         } 
+        $("#test2").html($("body").attr("style"));
     }
 }
 
