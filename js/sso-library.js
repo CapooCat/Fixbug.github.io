@@ -460,6 +460,7 @@ function FooterHeaderAlign() {
 function MarginOverflow() {
     $("#test1").html($("html").height() + " " + $(window).height() + " " + $("body").height() + " " + $(".account-container").height() + " " + /iPad/i.test(navigator.userAgent))
     if ($(".container").outerHeight() > $("html").height() ||
+        ($(".account-container").width() > 625 && $(".account-container").height() > $("html").height()) ||
         ($(".account-container").width() < 625 && $(".account-container").outerHeight() > $("html").height()) ||
         $(".full").outerHeight() + 20 > $("html").height() ||
         $(".container").find('.header').length > 0) {
