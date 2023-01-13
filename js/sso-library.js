@@ -467,7 +467,7 @@ function MarginOverflow() {
         ($(".container").find('.header').length > 0 && $("html").width() <= 625)) {
         if ($("html").width() > 625) {
             $(".container").css('margin', '5vh 0px');
-            $("body").css('margin-top', '60px');
+            $(".account-container").css('margin', '10vh 0px 5vh 0px');
         } else {
             $(".container, .account-container").css('margin', '0');
         }
