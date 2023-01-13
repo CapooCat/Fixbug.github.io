@@ -466,10 +466,9 @@ function MarginOverflow() {
         $(".full").outerHeight() + 20 > $("html").height() ||
         ($(".container").find('.header').length > 0 && $("html").width() <= 625)) {
         if ($("html").width() > 625) {
-            $(".container").css('margin', '5vh 0px');
+            $(".container, .account-container").css('margin', '5vh 0px');
             if($(".account-container").length > 0) {
                 $("html").css('margin-top', '60px');
-                $(".account-container").css('margin', '5vh 0px 5vh 0px');
             }
         } else {
             $(".container, .account-container").css('margin', '0');
